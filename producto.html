@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Megalodon Surf Wax | Premium Cold Water Wax</title>
+    <meta name="description" content="Mejora tu grip en el agua con Megalodon Surf Wax. Cera de surf artesanal 100% natural, fabricada en Purema, Chile.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #030305;
+            --surface: rgba(255, 255, 255, 0.03);
+            --surface-hover: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.06);
+            --text-main: #f4f4f5;
+            --text-muted: #a1a1aa;
+            
+            --accent-primary: #FF5100;
+            --accent-secondary: #FF8A00;
+            --gradient-accent: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+        
+        .text-gradient {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .glass-panel {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--gradient-accent);
+            color: #000;
+            text-align: center;
+            padding: 0.5rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Navigation */
+        .navbar-wrapper {
+            position: fixed;
+            top: 2rem;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 0 5%;
+            transition: all 0.4s ease;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+        }
+
+        .nav-logo img {
+            height: 80px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: var(--gradient-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: #000;
+            box-shadow: 0 10px 20px rgba(255, 81, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 81, 0, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-primary);
+            color: #fff;
+            background: rgba(255, 81, 0, 0.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.8; /* Video más claro */
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, var(--bg-color) 100%);
+            z-index: 1;
+        }
+        
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(255,81,0,0.15) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 12vw, 9rem);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-desc {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Trust Strip */
+        .trust-strip {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 2.5rem 0;
+            background: url('bg-ocean.png') center/cover fixed;
+            position: relative;
+            z-index: 10;
+        }
+
+        .parallax-ocean {
+            background: url('bg-ocean.png') center/cover fixed;
+        }
+
+        .trust-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .trust-item svg {
+            color: var(--accent-primary);
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Sections General */
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-eyebrow {
+            display: block;
+            color: var(--accent-primary);
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            line-height: 1;
+            letter-spacing: 0.02em;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            padding: 3rem 2rem;
+            transition: transform 0.4s ease, background 0.4s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            background: var(--surface-hover);
+            border-color: rgba(255, 81, 0, 0.2);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: rgba(255, 81, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+            margin-bottom: 2rem;
+        }
+        
+        .benefit-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .benefit-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        /* About Us */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-desc {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .about-desc strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 3rem;
+            border-color: rgba(255,81,0,0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        
+        /* Carousel */
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 2.5rem;
+            padding: 1rem 0 3rem 0;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+        .carousel-card {
+            flex: 0 0 85%;
+            max-width: 350px;
+            scroll-snap-align: center;
+        }
+        @media (min-width: 768px) {
+            .carousel-card {
+                flex: 0 0 calc(33.333% - 1.7rem);
+            }
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 81, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .product-image-container {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: linear-gradient(45deg, #111, #1a1a24);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.5) 100%);
+        }
+
+        /* Styling for product placeholders without photos */
+        .product-visual {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: rgba(255,255,255,0.1);
+            z-index: 1;
+            letter-spacing: 0.1em;
+            transform: rotate(-10deg);
+        }
+        .product-badge {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: var(--gradient-accent);
+            color: #000;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            z-index: 2;
+        }
+
+        .product-info {
+            padding: 2.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-temp {
+            color: var(--accent-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product-desc {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            flex: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: #fff;
+            line-height: 1;
+        }
+
+        /* Comparison Table */
+        .comparison-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            min-width: 600px;
+        }
+
+        .comparison-table th, 
+        .comparison-table td {
+            padding: 1.5rem 2rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .comparison-table th.brand {
+            color: var(--accent-primary);
+        }
+
+        .comparison-table td {
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .comparison-table td:not(:first-child) {
+            color: var(--text-muted);
+        }
+        
+        .comparison-table tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .check-icon {
+            color: var(--accent-primary);
+            margin-right: 0.5rem;
+        }
+
+        .cross-icon {
+            color: #555;
+            margin-right: 0.5rem;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            padding: 2.5rem;
+        }
+
+        .stars {
+            display: flex;
+            gap: 0.2rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .stars svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--surface-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .author-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* CTA Final */
+        .cta-section {
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 15%, transparent 85%, var(--bg-color) 100%), url('bg-texture.png') center/cover fixed;
+        }
+        
+        .cta-box {
+            background: linear-gradient(to right, rgba(255,81,0,0.1), transparent);
+            border: 1px solid rgba(255,81,0,0.2);
+            padding: 5rem 2rem;
+            border-radius: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(255,81,0,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+
+        .cta-section .section-title {
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 6rem 5% 2rem;
+            background: #020202;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            max-width: 1280px;
+            margin: 0 auto 4rem;
+        }
+
+        .footer-logo img {
+            height: 120px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* WhatsApp Sticky */
+        .sticky-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sticky-wa:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .sticky-wa svg {
+            width: 35px;
+            height: 35px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem; }
+            .nav-links { display: none; }
+            .hero-actions { flex-direction: column; }
+            .btn { width: 100%; }
+            .trust-grid { flex-direction: column; align-items: center; gap: 1rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-stats { padding: 2rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        🔥 Envío Gratis a Todo Chile por compras sobre $30.000 🔥
+    </div>
+
+    <!-- Navigation -->
+    <div class="navbar-wrapper" id="navbar">
+        <nav class="navbar glass-panel">
+            <a href="#" class="nav-logo">
+                <img src="blanco.png" alt="Megalodon Surf Wax">
+            </a>
+            <div class="nav-links">
+                <a href="megalodon_v2.html#beneficios">Beneficios</a>
+                <a href="productos.html">Catálogo</a>
+                <a href="nosotros.html">Nosotros</a>
+                <a href="megalodon_v2.html#testimonios">Reseñas</a>
+            </div>
+            <a href="productos.html" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Comprar</a>
+        </nav>
+    </div>
+
+    
+    <style>
+        .pdp-container {
+            padding-top: 120px;
+            padding-bottom: 4rem;
+        }
+        .breadcrumb {
+            color: var(--sand);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        .breadcrumb a {
+            color: var(--orange);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .pdp-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        @media (min-width: 900px) {
+            .pdp-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .pdp-image-col {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            aspect-ratio: 4/5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .pdp-image-col img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .pdp-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        .pdp-price-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .pdp-price {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--orange);
+        }
+        .pdp-price-old {
+            font-size: 1.5rem;
+            color: var(--sand);
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        .pdp-desc {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--sand);
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .pdp-meta-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .size-selector {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+        .size-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .size-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .size-btn.active {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: var(--black);
+        }
+
+        .qty-selector {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .qty-btn {
+            background: transparent;
+            border: none;
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .qty-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .qty-input {
+            width: 50px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            color: var(--white);
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .qty-input:focus { outline: none; }
+        
+        .pdp-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .pdp-actions .btn {
+            width: 100%;
+            justify-content: center;
+            padding: 1.2rem;
+            font-size: 1.1rem;
+        }
+        .btn-green {
+            background: #25D366;
+            color: white;
+            border-color: #25D366;
+        }
+        .btn-green:hover {
+            background: #128C7E;
+            border-color: #128C7E;
+            color: white;
+            box-shadow: 0 0 20px rgba(37,211,102,0.4);
+        }
+    </style>
+
+    <section class="section pdp-container">
+        <div class="container">
+            <div class="breadcrumb" id="pdpBreadcrumb">
+                <a href="megalodon_v2.html">Inicio</a> / <a href="productos.html">Catálogo</a> / <span id="bcCategory">...</span>
+            </div>
+
+            <div class="pdp-grid">
+                <!-- Imagen -->
+                <div class="pdp-image-col glass-panel" data-aos="fade-right">
+                    <img id="pdpImage" src="" alt="Producto">
+                </div>
+
+                <!-- Detalles -->
+                <div class="pdp-info-col" data-aos="fade-left">
+                    <h1 class="pdp-title" id="pdpTitle">Cargando...</h1>
+                    
+                    <div class="pdp-price-wrap">
+                        <span class="pdp-price" id="pdpPrice">$0</span>
+                        <span class="pdp-price-old" id="pdpOldPrice"></span>
+                    </div>
+
+                    <p class="pdp-desc" id="pdpDesc">...</p>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <span class="pdp-meta-label">Categoría</span>
+                        <span style="color: var(--orange);" id="pdpCat">...</span>
+                    </div>
+
+                    <!-- Tallas (Solo Ropa) -->
+                    <div id="pdpSizesWrapper" style="display: none;">
+                        <span class="pdp-meta-label">Tallas</span>
+                        <div class="size-selector" id="pdpSizes">
+                            <!-- Generado dinámicamente -->
+                        </div>
+                    </div>
+
+                    <!-- Cantidad -->
+                    <span class="pdp-meta-label">Cantidad</span>
+                    <div class="qty-selector">
+                        <button class="qty-btn" onclick="updateQty(-1)">-</button>
+                        <input type="number" class="qty-input" id="pdpQty" value="1" min="1" readonly>
+                        <button class="qty-btn" onclick="updateQty(1)">+</button>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="pdp-actions">
+                        <button class="btn btn-green" onclick="orderWhatsApp()">Pedir por WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const productsDB = {
+            'cold-wax': {
+                name: 'Cold Water Wax',
+                price: '$4.990',
+                oldPrice: '',
+                desc: 'Fórmula artesanal 100% natural. Grip brutal para el Pacífico chileno. Temperatura recomendada: Agua Fría (9° - 14°C).',
+                cat: 'Ceras',
+                img: 'wax_1.png',
+                sizes: []
+            },
+            'cool-wax': {
+                name: 'Cool Water Wax',
+                price: '$4.990',
+                oldPrice: '',
+                desc: 'Para los días de verano. Más firme, ideal para agua fresca y viajes al norte. Temperatura recomendada: Agua Fresca (13° - 20°C).',
+                cat: 'Ceras',
+                img: 'wax_2.png',
+                sizes: []
+            },
+            'pack-3': {
+                name: 'Surf Pack: 3 Barras',
+                price: '$12.900',
+                oldPrice: '$14.970',
+                desc: 'Lleva 3 barras y ahorra. El pack perfecto para el surfer que siempre quiere tener el mejor grip asegurado.',
+                cat: 'Ceras',
+                img: 'wax_3.png',
+                sizes: []
+            },
+            'polera': {
+                name: 'Polera Megalodon',
+                price: '$18.990',
+                oldPrice: '$24.990',
+                desc: 'Camiseta premium de corte oversize en algodón pesado. Hecha para el post-surf. Diseño exclusivo Megalodon.',
+                cat: 'Apparel',
+                img: 'bf88c491-03e3-42bd-8b4b-edc8245bcec8.png',
+                sizes: ['S', 'M', 'L', 'XL']
+            },
+            'leash': {
+                name: "Leash 9' Megalodon",
+                price: '$14.990',
+                oldPrice: '$19.990',
+                desc: 'Leash ultra resistente de 7mm de uretano premium para olas de hasta 2 metros. Seguridad total en el agua. Correa de tobillo de neopreno con máximo confort.',
+                cat: 'Accesorios',
+                img: 'leash_9.png',
+                sizes: []
+            }
+        };
+
+        let currentProduct = null;
+        let selectedSize = '';
+
+        function loadProduct() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id') || 'cold-wax';
+            currentProduct = productsDB[id] || productsDB['cold-wax'];
+
+            document.title = currentProduct.name + ' - Megalodon Surf Wax';
+            document.getElementById('bcCategory').textContent = currentProduct.cat;
+            document.getElementById('pdpImage').src = currentProduct.img;
+            document.getElementById('pdpTitle').textContent = currentProduct.name;
+            document.getElementById('pdpPrice').textContent = currentProduct.price;
+            document.getElementById('pdpOldPrice').textContent = currentProduct.oldPrice;
+            document.getElementById('pdpDesc').textContent = currentProduct.desc;
+            document.getElementById('pdpCat').textContent = currentProduct.cat;
+
+            // Tallas
+            const sizeWrap = document.getElementById('pdpSizesWrapper');
+            const sizeContainer = document.getElementById('pdpSizes');
+            if (currentProduct.sizes && currentProduct.sizes.length > 0) {
+                sizeWrap.style.display = 'block';
+                sizeContainer.innerHTML = currentProduct.sizes.map(s => 
+                    `<button class="size-btn" onclick="selectSize('${s}', this)">${s}</button>`
+                ).join('');
+            } else {
+                sizeWrap.style.display = 'none';
+            }
+        }
+
+        function selectSize(size, btn) {
+            selectedSize = size;
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function updateQty(change) {
+            const input = document.getElementById('pdpQty');
+            let val = parseInt(input.value) + change;
+            if (val < 1) val = 1;
+            input.value = val;
+        }
+
+        function generateMessage() {
+            if (currentProduct.sizes && currentProduct.sizes.length > 0 && !selectedSize) {
+                alert('Por favor selecciona una talla primero.');
+                return null;
+            }
+            const qty = document.getElementById('pdpQty').value;
+            let msg = `Hola! Quiero pedir el producto desde la web:%0A%0A`;
+            msg += `🛒 *Producto:* ${currentProduct.name}%0A`;
+            if (selectedSize) msg += `👕 *Talla:* ${selectedSize}%0A`;
+            msg += `🔢 *Cantidad:* ${qty}%0A`;
+            msg += `💵 *Precio Unitario:* ${currentProduct.price}%0A`;
+            return msg;
+        }
+
+        function orderWhatsApp() {
+            const msg = generateMessage();
+            if (msg) {
+                window.open(`https://wa.me/56900000000?text=${msg}`, '_blank');
+            }
+        }
+
+
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadProduct);
+    </script>
+<!-- Footer -->
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="#" class="footer-logo">
+                    <img src="blanco.png" alt="Megalodon Surf Wax">
+                </a>
+                <p class="footer-desc">Cera de surf artesanal 100% natural. Formulada en Purema, Chile para el Pacífico Sur.</p>
+            </div>
+            
+            <div class="footer-col footer-links">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="#beneficios">Beneficios</a></li>
+                    <li><a href="productos.html">Catálogo Oficial</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="#testimonios">Comunidad</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col footer-links">
+                <h4>Conecta</h4>
+                <ul>
+                    <li><a href="https://instagram.com/megalodon_surfwax" target="_blank">Instagram</a></li>
+                    <li><a href="https://wa.me/56900000000" target="_blank">WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            &copy; 2026 Megalodon Surf Wax. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- Sticky WhatsApp Button -->
+    <a href="https://wa.me/56900000000" target="_blank" class="sticky-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animations
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.top = '10px';
+                navbar.querySelector('.navbar').style.background = 'rgba(10, 10, 15, 0.8)';
+            } else {
+                navbar.style.top = '2rem';
+                navbar.querySelector('.navbar').style.background = 'rgba(255, 255, 255, 0.03)';
+            }
+        });
+    </script>
+</body>
+</html>

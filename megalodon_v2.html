@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Megalodon Surf Wax | Premium Cold Water Wax</title>
+    <meta name="description" content="Mejora tu grip en el agua con Megalodon Surf Wax. Cera de surf artesanal 100% natural, fabricada en Purema, Chile.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #030305;
+            --surface: rgba(255, 255, 255, 0.03);
+            --surface-hover: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.06);
+            --text-main: #f4f4f5;
+            --text-muted: #a1a1aa;
+            
+            --accent-primary: #FF5100;
+            --accent-secondary: #FF8A00;
+            --gradient-accent: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+        
+        .text-gradient {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .glass-panel {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--gradient-accent);
+            color: #000;
+            text-align: center;
+            padding: 0.5rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Navigation */
+        .navbar-wrapper {
+            position: fixed;
+            top: 2rem;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 0 5%;
+            transition: all 0.4s ease;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+        }
+
+        .nav-logo img {
+            height: 80px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: var(--gradient-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: #000;
+            box-shadow: 0 10px 20px rgba(255, 81, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 81, 0, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-primary);
+            color: #fff;
+            background: rgba(255, 81, 0, 0.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.8; /* Video más claro */
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, var(--bg-color) 100%);
+            z-index: 1;
+        }
+        
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(255,81,0,0.15) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 12vw, 9rem);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-desc {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Trust Strip */
+        .trust-strip {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 2.5rem 0;
+            background: url('bg-ocean.png') center/cover fixed;
+            position: relative;
+            z-index: 10;
+        }
+
+        .parallax-ocean {
+            background: url('bg-ocean.png') center/cover fixed;
+        }
+
+        .trust-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .trust-item svg {
+            color: var(--accent-primary);
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Sections General */
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-eyebrow {
+            display: block;
+            color: var(--accent-primary);
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            line-height: 1;
+            letter-spacing: 0.02em;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            padding: 3rem 2rem;
+            transition: transform 0.4s ease, background 0.4s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            background: var(--surface-hover);
+            border-color: rgba(255, 81, 0, 0.2);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: rgba(255, 81, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+            margin-bottom: 2rem;
+        }
+        
+        .benefit-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .benefit-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        /* About Us */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-desc {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .about-desc strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 3rem;
+            border-color: rgba(255,81,0,0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        
+        /* Carousel */
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 2.5rem;
+            padding: 1rem 0 3rem 0;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+        .carousel-card {
+            flex: 0 0 85%;
+            max-width: 350px;
+            scroll-snap-align: center;
+        }
+        @media (min-width: 768px) {
+            .carousel-card {
+                flex: 0 0 calc(33.333% - 1.7rem);
+            }
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 81, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .product-image-container {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: linear-gradient(45deg, #111, #1a1a24);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.5) 100%);
+        }
+
+        /* Styling for product placeholders without photos */
+        .product-visual {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: rgba(255,255,255,0.1);
+            z-index: 1;
+            letter-spacing: 0.1em;
+            transform: rotate(-10deg);
+        }
+        .product-badge {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: var(--gradient-accent);
+            color: #000;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            z-index: 2;
+        }
+
+        .product-info {
+            padding: 2.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-temp {
+            color: var(--accent-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product-desc {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            flex: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: #fff;
+            line-height: 1;
+        }
+
+        /* Comparison Table */
+        .comparison-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            min-width: 600px;
+        }
+
+        .comparison-table th, 
+        .comparison-table td {
+            padding: 1.5rem 2rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .comparison-table th.brand {
+            color: var(--accent-primary);
+        }
+
+        .comparison-table td {
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .comparison-table td:not(:first-child) {
+            color: var(--text-muted);
+        }
+        
+        .comparison-table tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .check-icon {
+            color: var(--accent-primary);
+            margin-right: 0.5rem;
+        }
+
+        .cross-icon {
+            color: #555;
+            margin-right: 0.5rem;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            padding: 2.5rem;
+        }
+
+        .stars {
+            display: flex;
+            gap: 0.2rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .stars svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--surface-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .author-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* CTA Final */
+        .cta-section {
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 15%, transparent 85%, var(--bg-color) 100%), url('bg-ocean.png') center/cover fixed;
+        }
+        
+        .cta-box {
+            background: linear-gradient(to right, rgba(255,81,0,0.1), transparent);
+            border: 1px solid rgba(255,81,0,0.2);
+            padding: 5rem 2rem;
+            border-radius: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(255,81,0,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+
+        .cta-section .section-title {
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 6rem 5% 2rem;
+            background: #020202;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            max-width: 1280px;
+            margin: 0 auto 4rem;
+        }
+
+        .footer-logo img {
+            height: 120px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* WhatsApp Sticky */
+        .sticky-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sticky-wa:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .sticky-wa svg {
+            width: 35px;
+            height: 35px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem; }
+            .nav-links { display: none; }
+            .hero-actions { flex-direction: column; }
+            .btn { width: 100%; }
+            .trust-grid { flex-direction: column; align-items: center; gap: 1rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-stats { padding: 2rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        🔥 Envío Gratis a Todo Chile por compras sobre $30.000 🔥
+    </div>
+
+    <!-- Navigation -->
+    <div class="navbar-wrapper" id="navbar">
+        <nav class="navbar glass-panel">
+            <a href="#" class="nav-logo">
+                <img src="blanco.png" alt="Megalodon Surf Wax">
+            </a>
+            <div class="nav-links">
+                <a href="#beneficios">Beneficios</a>
+                <a href="productos.html">Catálogo</a>
+                <a href="nosotros.html">Nosotros</a>
+                <a href="#testimonios">Reseñas</a>
+            </div>
+            <a href="productos.html" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Comprar</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source src="Animación Oceánica Cinematográfica.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-glow"></div>
+        
+        <div class="hero-content" data-aos="fade-up">
+            <div class="hero-badge">🇨🇱 Cera Artesanal · Purema, Chile</div>
+            <h1 class="hero-title">Agarre Extremo para <br><span class="text-gradient">Aguas Heladas</span></h1>
+            <p class="hero-desc">La cera 100% natural diseñada para surfistas que exigen máximo rendimiento en el Pacífico Sur. Olvídate de resbalar.</p>
+            <div class="hero-actions">
+                <a href="productos.html" class="btn btn-primary">Ver Catálogo</a>
+                <a href="#beneficios" class="btn btn-outline">Por qué Megalodon</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Trust Strip -->
+    <div class="trust-strip">
+        <div class="container trust-grid">
+            <div class="trust-item" data-aos="fade-up" data-aos-delay="100">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                Grip Extremo 9°C a 15°C
+            </div>
+            <div class="trust-item" data-aos="fade-up" data-aos-delay="200">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                100% Ingredientes Naturales
+            </div>
+            <div class="trust-item" data-aos="fade-up" data-aos-delay="300">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                Despacho Rápido a Todo Chile
+            </div>
+        </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <section id="beneficios" class="section parallax-ocean">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-eyebrow">La Evolución del Grip</span>
+                <h2 class="section-title">Superioridad <span class="text-gradient">Técnica</span></h2>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card glass-panel" data-aos="fade-up" data-aos-delay="100">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    </div>
+                    <h3 class="benefit-title">Adherencia Sostenida</h3>
+                    <p class="benefit-desc">Fórmula ultra-pegajosa que mantiene su textura y fricción durante toda la sesión. No necesitas salir del agua a reaplicar.</p>
+                </div>
+                
+                <div class="benefit-card glass-panel" data-aos="fade-up" data-aos-delay="200">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                    </div>
+                    <h3 class="benefit-title">Eco-Consciente</h3>
+                    <p class="benefit-desc">Elaborada con cera de abeja local y aceite de coco orgánico. Cero parafinas, cero derivados de petróleo contaminantes.</p>
+                </div>
+                
+                <div class="benefit-card glass-panel" data-aos="fade-up" data-aos-delay="300">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    </div>
+                    <h3 class="benefit-title">Testeo en Purema</h3>
+                    <p class="benefit-desc">Creada, calibrada y testeada rigurosamente en las condiciones más frías y exigentes del sur de Chile.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="productos" class="section" style="background: rgba(255,255,255,0.01);">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-eyebrow">La Cera Perfecta</span>
+                <h2 class="section-title">Nuestras <span class="text-gradient">Fórmulas</span></h2>
+            </div>
+
+            <div class="carousel-container">
+                <!-- Product 1 -->
+                <div class="product-card carousel-card glass-panel" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-image-container" style="background: url('wax_1.png') center/cover; aspect-ratio: 4/5;">
+                        <div class="product-badge">Best Seller</div>
+                    </div>
+                    <div class="product-info" style="text-align: center;">
+                        <h3 class="product-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Cold Water</h3>
+                        <p class="product-desc" style="margin-bottom: 1.5rem;">Diseñada para el Pacífico. Extra adherencia en temperaturas bajo los 14°C.</p>
+                        <a href="producto.html?id=cold-wax" class="btn btn-outline" style="width: 100%;">Descubrir Producto</a>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card carousel-card glass-panel" data-aos="fade-up" data-aos-delay="200" style="border-color: rgba(255,81,0,0.3);">
+                    <div class="product-image-container" style="background: url('wax_2.png') center/cover; aspect-ratio: 4/5;">
+                        <div class="product-badge">Eco Friendly</div>
+                    </div>
+                    <div class="product-info" style="text-align: center;">
+                        <h3 class="product-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Cool Water</h3>
+                        <p class="product-desc" style="margin-bottom: 1.5rem;">Ideal para verano. Mayor firmeza que soporta los rayos directos del sol.</p>
+                        <a href="producto.html?id=cool-wax" class="btn btn-primary" style="width: 100%;">Descubrir Producto</a>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card carousel-card glass-panel" data-aos="fade-up" data-aos-delay="300">
+                    <div class="product-image-container" style="background: url('wax_3.png') center/cover; aspect-ratio: 4/5;">
+                    </div>
+                    <div class="product-info" style="text-align: center;">
+                        <h3 class="product-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Grip Extremo</h3>
+                        <p class="product-desc" style="margin-bottom: 1.5rem;">Textura desarrollada ola a ola para garantizar máxima fricción sin desgaste.</p>
+                        <a href="producto.html?id=pack-3" class="btn btn-outline" style="width: 100%;">Descubrir Producto</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;" data-aos="fade-up">
+                <a href="productos.html" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.2rem 3rem;">Ver Catálogo Completo</a>
+            </div>
+        </div>
+    </section>
+
+<!-- Comparison -->
+    <section class="section parallax-ocean">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-eyebrow">La Verdad del Grip</span>
+                <h2 class="section-title">Megalodon vs <span class="text-gradient">El Resto</span></h2>
+            </div>
+            
+            <div class="comparison-wrapper glass-panel" data-aos="fade-up">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th class="brand">Megalodon</th>
+                            <th>Industriales</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ingredientes Base</td>
+                            <td><span class="check-icon">✓</span> Cera de Abeja y Coco</td>
+                            <td><span class="cross-icon">✗</span> Parafina (Petróleo)</td>
+                        </tr>
+                        <tr>
+                            <td>Impacto Oceánico</td>
+                            <td><span class="check-icon">✓</span> 100% Biodegradable</td>
+                            <td><span class="cross-icon">✗</span> Microplásticos tóxicos</td>
+                        </tr>
+                        <tr>
+                            <td>Durabilidad en Agua Fría</td>
+                            <td><span class="check-icon">✓</span> Alta (Mantiene textura)</td>
+                            <td><span class="cross-icon">✗</span> Baja (Se cristaliza)</td>
+                        </tr>
+                        <tr>
+                            <td>Origen de Fabricación</td>
+                            <td><span class="check-icon">✓</span> Purema, Chile</td>
+                            <td><span class="cross-icon">✗</span> Masivo Importado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonios" class="section" style="background: rgba(255,255,255,0.01);">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-eyebrow">Prueba Social</span>
+                <h2 class="section-title">Confianza de la <span class="text-gradient">Comunidad</span></h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card glass-panel" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stars">
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="testimonial-quote">"La mejor cera que he probado para Buchupureo. Aguanta horas sin perder el grip. Mucho mejor que las gringas."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">F</div>
+                        <div class="author-info">
+                            <h4>Felipe R.</h4>
+                            <p>Surfista Local</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card glass-panel" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stars">
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="testimonial-quote">"Por fin una cera natural que de verdad pega. El olor a coco es brutal y me quedo tranquilo de no contaminar el agua."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">D</div>
+                        <div class="author-info">
+                            <h4>Diego M.</h4>
+                            <p>Concepción</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card glass-panel" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stars">
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="testimonial-quote">"El formato en pack es ideal. Agarra perfecto en el frío de invierno en Pichilemu. Totalmente recomendada."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">C</div>
+                        <div class="author-info">
+                            <h4>Camila T.</h4>
+                            <p>Santiago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box" data-aos="zoom-in">
+                <h2 class="section-title">¿Listo para dejar de <span class="text-gradient">resbalar?</span></h2>
+                <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 3rem; max-width: 600px; margin-inline: auto;">Asegura tu grip extremo para la próxima sesión. Atendemos de forma directa y personalizada.</p>
+                <a href="https://wa.me/56900000000" target="_blank" class="btn btn-primary" style="padding: 1.2rem 3rem; font-size: 1.1rem;">Comprar por WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="#" class="footer-logo">
+                    <img src="blanco.png" alt="Megalodon Surf Wax">
+                </a>
+                <p class="footer-desc">Cera de surf artesanal 100% natural. Formulada en Purema, Chile para el Pacífico Sur.</p>
+            </div>
+            
+            <div class="footer-col footer-links">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="#beneficios">Beneficios</a></li>
+                    <li><a href="productos.html">Catálogo Oficial</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="#testimonios">Comunidad</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col footer-links">
+                <h4>Conecta</h4>
+                <ul>
+                    <li><a href="https://instagram.com/megalodon_surfwax" target="_blank">Instagram</a></li>
+                    <li><a href="https://wa.me/56900000000" target="_blank">WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            &copy; 2026 Megalodon Surf Wax. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- Sticky WhatsApp Button -->
+    <a href="https://wa.me/56900000000" target="_blank" class="sticky-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animations
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.top = '10px';
+                navbar.querySelector('.navbar').style.background = 'rgba(10, 10, 15, 0.8)';
+            } else {
+                navbar.style.top = '2rem';
+                navbar.querySelector('.navbar').style.background = 'rgba(255, 255, 255, 0.03)';
+            }
+        });
+    </script>
+</body>
+</html>

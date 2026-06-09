@@ -1,0 +1,170 @@
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    /* Navbar */
+    .navbar {
+        justify-content: center !important;
+        padding: 1rem !important;
+    }
+    .nav-links {
+        display: none !important;
+    }
+
+    /* Typography & Spacing */
+    .section {
+        padding: 4rem 0 !important;
+    }
+    .cta-section {
+        padding: 4rem 0 !important;
+    }
+    .cta-box {
+        padding: 3rem 1.5rem !important;
+    }
+    .hero-title {
+        font-size: clamp(3rem, 15vw, 5rem) !important;
+    }
+    .hero-desc {
+        font-size: 1.1rem !important;
+        margin-bottom: 2rem !important;
+    }
+    .hero-actions {
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+    .hero-actions .btn {
+        width: 100% !important;
+    }
+
+    /* Trust Strip */
+    .trust-strip {
+        padding: 2rem 0 !important;
+    }
+    .trust-grid {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 2rem !important;
+    }
+    .trust-item {
+        font-size: 1.1rem !important;
+        text-align: center;
+        flex-direction: column !important;
+        gap: 0.8rem !important;
+        max-width: 250px;
+    }
+    .trust-item svg {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    /* Grids */
+    .about-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+    .about-stats {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        padding: 1.5rem !important;
+    }
+    .products-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .benefits-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Comparison Table Fix for Mobile - Card Layout */
+    .comparison-wrapper {
+        padding: 0 !important; 
+        border-radius: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        backdrop-filter: none !important;
+    }
+    .comparison-table {
+        display: block;
+        min-width: 100% !important;
+    }
+    .comparison-table thead {
+        display: none; /* Ocultar cabecera para hacer tarjetas */
+    }
+    .comparison-table tbody, .comparison-table tr, .comparison-table td {
+        display: block;
+        width: 100%;
+    }
+    .comparison-table tr {
+        margin-bottom: 1.5rem;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px;
+        padding: 1.5rem;
+    }
+    .comparison-table td {
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        text-align: left !important;
+    }
+    /* Característica */
+    .comparison-table td:nth-child(1) {
+        font-weight: bold;
+        color: var(--accent-primary) !important;
+        font-size: 1.2rem !important;
+        border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+        padding-bottom: 1rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+    /* Megalodon */
+    .comparison-table td:nth-child(2) {
+        font-size: 1.1rem !important;
+        color: #fff !important;
+    }
+    .comparison-table td:nth-child(2)::before {
+        content: "Megalodon: ";
+        font-weight: 600;
+        opacity: 0.6;
+        margin-right: 0.5rem;
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+    /* Industriales */
+    .comparison-table td:nth-child(3) {
+        font-size: 1rem !important;
+        margin-top: 0.5rem;
+    }
+    .comparison-table td:nth-child(3)::before {
+        content: "Industriales: ";
+        font-weight: 600;
+        opacity: 0.6;
+        margin-right: 0.5rem;
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+
+    /* Footer */
+    .footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+        text-align: center;
+    }
+    .footer-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer-desc {
+        margin: 0 auto;
+    }
+
+    /* PDP (Product Detail Page) */
+    .pdp-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+    .pdp-actions .btn {
+        width: 100% !important;
+    }
+    .pdp-container {
+        padding-top: 100px !important;
+    }
+}
