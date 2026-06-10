@@ -87,14 +87,15 @@
 
         /* Navigation */
         .navbar-wrapper {
-            position: fixed;
-            top: 2rem;
+            position: sticky;
+            top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
             display: flex;
             justify-content: center;
-            padding: 0 5%;
+            padding: 0;
+            background: var(--bg-color);
             transition: all 0.4s ease;
         }
 
@@ -103,9 +104,12 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            max-width: 1000px;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
+            max-width: 100%;
+            padding: 0.8rem 5%;
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            border-top: none;
         }
 
         .nav-logo img {
@@ -202,8 +206,9 @@
             position: relative;
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             padding-top: 5rem;
+            padding-bottom: 2rem;
             overflow: hidden;
         }
 
@@ -216,6 +221,10 @@
             object-fit: cover;
             z-index: 0;
             opacity: 0.8; /* Video más claro */
+        }
+
+        .mobile-video {
+            display: none;
         }
 
         .hero-overlay {
@@ -243,6 +252,7 @@
             max-width: 900px;
             margin: 0 auto;
             text-align: center;
+            width: 100%;
         }
 
         .hero-badge {
@@ -259,22 +269,22 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--text-muted);
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .hero-title {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 12vw, 9rem);
+            font-size: clamp(2.5rem, 8vw, 5rem);
             line-height: 0.9;
             letter-spacing: 0.02em;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .hero-desc {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
             color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 3rem;
+            max-width: 500px;
+            margin: 0 auto 1.5rem;
             font-weight: 300;
         }
 
@@ -808,9 +818,58 @@
             height: 35px;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            color: #fff;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
         @media (max-width: 768px) {
-            .navbar { padding: 1rem; }
-            .nav-links { display: none; }
+            .hero {
+                min-height: auto;
+                flex-direction: column;
+                padding-top: 0;
+            }
+            .hero-content {
+                padding: 1rem 1rem 3rem;
+            }
+            .desktop-video { display: none; }
+            .mobile-video { 
+                display: block; 
+                position: relative !important;
+                width: 100%;
+                height: auto !important;
+                object-fit: contain !important;
+            }
+            
+            .navbar { padding: 1rem; justify-content: space-between !important; }
+            .menu-toggle { display: block; }
+            .nav-links { 
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 1rem;
+                right: 1rem;
+                background: rgba(10, 10, 15, 0.95);
+                backdrop-filter: blur(10px);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                padding: 1.5rem;
+                margin-top: 0.5rem;
+                gap: 1rem;
+                text-align: center;
+            }
+            .nav-links.active { display: flex !important; }
             .hero-actions { flex-direction: column; }
             .btn { width: 100%; }
             .trust-grid { flex-direction: column; align-items: center; gap: 1rem; }
@@ -833,20 +892,28 @@
             <a href="#" class="nav-logo">
                 <img src="blanco.png" alt="Megalodon Surf Wax">
             </a>
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="#beneficios">Beneficios</a>
                 <a href="productos.html">Catálogo</a>
                 <a href="nosotros.html">Nosotros</a>
                 <a href="#testimonios">Reseñas</a>
             </div>
-            <a href="productos.html" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Comprar</a>
+            <div class="nav-right">
+                <a href="productos.html" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Comprar</a>
+                <button class="menu-toggle" id="menuToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
         </nav>
     </div>
 
     <!-- Hero Section -->
     <header class="hero">
-        <video class="hero-video" autoplay loop muted playsinline>
-            <source src="Animación Oceánica Cinematográfica.mp4" type="video/mp4">
+        <video class="hero-video desktop-video" autoplay loop muted playsinline>
+            <source src="Vintage_surf_illustration_animation_202606101527.mp4" type="video/mp4">
+        </video>
+        <video class="hero-video mobile-video" autoplay loop muted playsinline>
+            <source src="MEGALODON_logo_reveals_surfer_202606101551.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-glow"></div>
@@ -1130,6 +1197,11 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Hamburger Menu Toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
         // Initialize Animations
         AOS.init({
             duration: 800,
@@ -1140,11 +1212,9 @@
         // Navbar Scroll Effect
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.style.top = '10px';
-                navbar.querySelector('.navbar').style.background = 'rgba(10, 10, 15, 0.8)';
+            if (window.scrollY > 10) {
+                navbar.querySelector('.navbar').style.background = 'rgba(10, 10, 15, 0.95)';
             } else {
-                navbar.style.top = '2rem';
                 navbar.querySelector('.navbar').style.background = 'rgba(255, 255, 255, 0.03)';
             }
         });

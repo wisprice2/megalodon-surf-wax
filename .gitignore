@@ -2,3 +2,5 @@
 megalodon_final*.html
 __pycache__/
 .vscode/
+
+.vercel
