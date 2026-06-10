@@ -1,0 +1,12 @@
+{
+  "name": "megalodon-surf-wax",
+  "version": "1.0.0",
+  "description": "Megalodon Surf Wax e-commerce backend and frontend integration",
+  "main": "api/products.js",
+  "type": "module",
+  "dependencies": {
+    "@neondatabase/serverless": "^0.9.3",
+    "@vercel/blob": "^0.23.3",
+    "formidable": "^3.5.1"
+  }
+}

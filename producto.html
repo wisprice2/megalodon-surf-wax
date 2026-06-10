@@ -87,14 +87,15 @@
 
         /* Navigation */
         .navbar-wrapper {
-            position: fixed;
-            top: 2rem;
+            position: sticky;
+            top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
             display: flex;
             justify-content: center;
-            padding: 0 5%;
+            padding: 0;
+            background: var(--bg-color);
             transition: all 0.4s ease;
         }
 
@@ -103,9 +104,12 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            max-width: 1000px;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
+            max-width: 100%;
+            padding: 0.8rem 5%;
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            border-top: none;
         }
 
         .nav-logo img {
@@ -202,8 +206,9 @@
             position: relative;
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             padding-top: 5rem;
+            padding-bottom: 2rem;
             overflow: hidden;
         }
 
@@ -216,6 +221,10 @@
             object-fit: cover;
             z-index: 0;
             opacity: 0.8; /* Video más claro */
+        }
+
+        .mobile-video {
+            display: none;
         }
 
         .hero-overlay {
@@ -243,6 +252,7 @@
             max-width: 900px;
             margin: 0 auto;
             text-align: center;
+            width: 100%;
         }
 
         .hero-badge {
@@ -259,22 +269,22 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--text-muted);
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .hero-title {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 12vw, 9rem);
+            font-size: clamp(2.5rem, 8vw, 5rem);
             line-height: 0.9;
             letter-spacing: 0.02em;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .hero-desc {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
             color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 3rem;
+            max-width: 500px;
+            margin: 0 auto 1.5rem;
             font-weight: 300;
         }
 
@@ -696,7 +706,7 @@
             padding: 8rem 0;
             text-align: center;
             position: relative;
-            background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 15%, transparent 85%, var(--bg-color) 100%), url('bg-texture.png') center/cover fixed;
+            background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 15%, transparent 85%, var(--bg-color) 100%), url('bg-ocean.png') center/cover fixed;
         }
         
         .cta-box {
@@ -808,9 +818,58 @@
             height: 35px;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            color: #fff;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
         @media (max-width: 768px) {
-            .navbar { padding: 1rem; }
-            .nav-links { display: none; }
+            .hero {
+                min-height: auto;
+                flex-direction: column;
+                padding-top: 0;
+            }
+            .hero-content {
+                padding: 1rem 1rem 3rem;
+            }
+            .desktop-video { display: none; }
+            .mobile-video { 
+                display: block; 
+                position: relative !important;
+                width: 100%;
+                height: auto !important;
+                object-fit: contain !important;
+            }
+            
+            .navbar { padding: 1rem; justify-content: space-between !important; }
+            .menu-toggle { display: block; }
+            .nav-links { 
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 1rem;
+                right: 1rem;
+                background: rgba(10, 10, 15, 0.95);
+                backdrop-filter: blur(10px);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                padding: 1.5rem;
+                margin-top: 0.5rem;
+                gap: 1rem;
+                text-align: center;
+            }
+            .nav-links.active { display: flex !important; }
             .hero-actions { flex-direction: column; }
             .btn { width: 100%; }
             .trust-grid { flex-direction: column; align-items: center; gap: 1rem; }
@@ -833,13 +892,18 @@
             <a href="#" class="nav-logo">
                 <img src="blanco.png" alt="Megalodon Surf Wax">
             </a>
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="megalodon_v2.html#beneficios">Beneficios</a>
                 <a href="productos.html">Catálogo</a>
                 <a href="nosotros.html">Nosotros</a>
                 <a href="megalodon_v2.html#testimonios">Reseñas</a>
             </div>
-            <a href="productos.html" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Comprar</a>
+            <div class="nav-right">
+                <a href="productos.html" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Comprar</a>
+                <button class="menu-toggle" id="menuToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
         </nav>
     </div>
 
@@ -1023,7 +1087,7 @@
             <div class="pdp-grid">
                 <!-- Imagen -->
                 <div class="pdp-image-col glass-panel" data-aos="fade-right">
-                    <img id="pdpImage" src="" alt="Producto">
+                    <img id="pdpImage" src="logo.png" alt="Producto">
                 </div>
 
                 <!-- Detalles -->
@@ -1044,7 +1108,7 @@
 
                     <!-- Tallas (Solo Ropa) -->
                     <div id="pdpSizesWrapper" style="display: none;">
-                        <span class="pdp-meta-label">Tallas</span>
+                        <span class="pdp-meta-label">Opciones / Tallas</span>
                         <div class="size-selector" id="pdpSizes">
                             <!-- Generado dinámicamente -->
                         </div>
@@ -1068,77 +1132,70 @@
     </section>
 
     <script>
-        const productsDB = {
-            'cold-wax': {
-                name: 'Cold Water Wax',
-                price: '$4.990',
-                oldPrice: '',
-                desc: 'Fórmula artesanal 100% natural. Grip brutal para el Pacífico chileno. Temperatura recomendada: Agua Fría (9° - 14°C).',
-                cat: 'Ceras',
-                img: 'wax_1.png',
-                sizes: []
-            },
-            'cool-wax': {
-                name: 'Cool Water Wax',
-                price: '$4.990',
-                oldPrice: '',
-                desc: 'Para los días de verano. Más firme, ideal para agua fresca y viajes al norte. Temperatura recomendada: Agua Fresca (13° - 20°C).',
-                cat: 'Ceras',
-                img: 'wax_2.png',
-                sizes: []
-            },
-            'pack-3': {
-                name: 'Surf Pack: 3 Barras',
-                price: '$12.900',
-                oldPrice: '$14.970',
-                desc: 'Lleva 3 barras y ahorra. El pack perfecto para el surfer que siempre quiere tener el mejor grip asegurado.',
-                cat: 'Ceras',
-                img: 'wax_3.png',
-                sizes: []
-            },
-            'polera': {
-                name: 'Polera Megalodon',
-                price: '$18.990',
-                oldPrice: '$24.990',
-                desc: 'Camiseta premium de corte oversize en algodón pesado. Hecha para el post-surf. Diseño exclusivo Megalodon.',
-                cat: 'Apparel',
-                img: 'bf88c491-03e3-42bd-8b4b-edc8245bcec8.png',
-                sizes: ['S', 'M', 'L', 'XL']
-            },
-            'leash': {
-                name: "Leash 9' Megalodon",
-                price: '$14.990',
-                oldPrice: '$19.990',
-                desc: 'Leash ultra resistente de 7mm de uretano premium para olas de hasta 2 metros. Seguridad total en el agua. Correa de tobillo de neopreno con máximo confort.',
-                cat: 'Accesorios',
-                img: 'leash_9.png',
-                sizes: []
-            }
-        };
-
+        let ALL_PRODUCTS = [];
         let currentProduct = null;
         let selectedSize = '';
 
+        async function initProduct() {
+            try {
+                const res = await fetch('/api/products?t=' + Date.now());
+                if (res.ok) {
+                    ALL_PRODUCTS = await res.json();
+                } else {
+                    ALL_PRODUCTS = getDefaultProducts();
+                }
+            } catch (err) {
+                console.error('Fetch error, using default products', err);
+                ALL_PRODUCTS = getDefaultProducts();
+            }
+            
+            loadProduct();
+        }
+
+        function getDefaultProducts() {
+            return [
+                { id: 1, name: 'Cold Water Wax', category: 'Ceras', price: 4990, compareAtPrice: null, description: 'Fórmula artesanal 100% natural. Grip brutal para el Pacífico chileno.', images: ['wax_1.png'], tags: ['Best Seller'], stock: 50, brand: 'MEGALODON', variants: [] },
+                { id: 2, name: 'Cool Water Wax', category: 'Ceras', price: 4990, compareAtPrice: null, description: 'Para los días de verano. Más firme, ideal para agua fresca y viajes al norte.', images: ['wax_2.png'], tags: ['Nuevo'], stock: 40, brand: 'MEGALODON', variants: [] },
+                { id: 3, name: 'Surf Pack: 3 Barras', category: 'Ceras', price: 12900, compareAtPrice: 14970, description: 'Lleva 3 barras y ahorra. El pack del surfer que siempre tiene cera en la maleta.', images: ['wax_3.png'], tags: ['Ahorro'], stock: 30, brand: 'MEGALODON', variants: [] },
+                { id: 4, name: 'Polera Megalodon', category: 'Apparel', price: 18990, compareAtPrice: 24990, description: 'Polera de algodón premium con logo vintage. Hecha para el post-surf.', images: ['bf88c491-03e3-42bd-8b4b-edc8245bcec8.png'], tags: ['Apparel'], stock: 20, brand: 'MEGALODON', variants: ['S', 'M', 'L', 'XL'] },
+                { id: 5, name: "Leash 9' Megalodon", category: 'Accesorios', price: 14990, compareAtPrice: 19990, description: 'Leash ultra resistente de 7mm para olas de hasta 2 metros. Seguridad total.', images: ['leash_9.png'], tags: ['Nuevo'], stock: 15, brand: 'MEGALODON', variants: [] }
+            ];
+        }
+
         function loadProduct() {
             const params = new URLSearchParams(window.location.search);
-            const id = params.get('id') || 'cold-wax';
-            currentProduct = productsDB[id] || productsDB['cold-wax'];
+            const id = params.get('id') || '1';
+            
+            // Match by id or match by URL slug fallback (e.g. 'cold-wax', 'polera')
+            currentProduct = ALL_PRODUCTS.find(p => p.id == id || p.name.toLowerCase().replace(/\s+/g, '-').includes(id.toLowerCase())) || ALL_PRODUCTS[0];
+
+            if (!currentProduct) return;
 
             document.title = currentProduct.name + ' - Megalodon Surf Wax';
-            document.getElementById('bcCategory').textContent = currentProduct.cat;
-            document.getElementById('pdpImage').src = currentProduct.img;
+            document.getElementById('bcCategory').textContent = currentProduct.category;
+            
+            const imgUrl = (currentProduct.images && currentProduct.images.length > 0) ? currentProduct.images[0] : 'logo.png';
+            document.getElementById('pdpImage').src = imgUrl;
             document.getElementById('pdpTitle').textContent = currentProduct.name;
-            document.getElementById('pdpPrice').textContent = currentProduct.price;
-            document.getElementById('pdpOldPrice').textContent = currentProduct.oldPrice;
-            document.getElementById('pdpDesc').textContent = currentProduct.desc;
-            document.getElementById('pdpCat').textContent = currentProduct.cat;
+            
+            document.getElementById('pdpPrice').textContent = '$' + Number(currentProduct.price).toLocaleString('es-CL');
+            
+            const oldPriceElement = document.getElementById('pdpOldPrice');
+            if (currentProduct.compareAtPrice) {
+                oldPriceElement.textContent = '$' + Number(currentProduct.compareAtPrice).toLocaleString('es-CL');
+            } else {
+                oldPriceElement.textContent = '';
+            }
+            
+            document.getElementById('pdpDesc').textContent = currentProduct.description;
+            document.getElementById('pdpCat').textContent = currentProduct.category;
 
-            // Tallas
+            // Variants / sizes
             const sizeWrap = document.getElementById('pdpSizesWrapper');
             const sizeContainer = document.getElementById('pdpSizes');
-            if (currentProduct.sizes && currentProduct.sizes.length > 0) {
+            if (currentProduct.variants && currentProduct.variants.length > 0) {
                 sizeWrap.style.display = 'block';
-                sizeContainer.innerHTML = currentProduct.sizes.map(s => 
+                sizeContainer.innerHTML = currentProduct.variants.map(s => 
                     `<button class="size-btn" onclick="selectSize('${s}', this)">${s}</button>`
                 ).join('');
             } else {
@@ -1160,30 +1217,28 @@
         }
 
         function generateMessage() {
-            if (currentProduct.sizes && currentProduct.sizes.length > 0 && !selectedSize) {
-                alert('Por favor selecciona una talla primero.');
+            if (currentProduct.variants && currentProduct.variants.length > 0 && !selectedSize) {
+                alert('Por favor selecciona una talla/opción primero.');
                 return null;
             }
             const qty = document.getElementById('pdpQty').value;
-            let msg = `Hola! Quiero pedir el producto desde la web:%0A%0A`;
-            msg += `🛒 *Producto:* ${currentProduct.name}%0A`;
-            if (selectedSize) msg += `👕 *Talla:* ${selectedSize}%0A`;
-            msg += `🔢 *Cantidad:* ${qty}%0A`;
-            msg += `💵 *Precio Unitario:* ${currentProduct.price}%0A`;
+            let msg = "Hola! Quiero pedir el producto desde la web:\n\n";
+            msg += "📦 *Producto:* " + currentProduct.name + "\n";
+            if (selectedSize) msg += "📏 *Opción/Talla:* " + selectedSize + "\n";
+            msg += "🔢 *Cantidad:* " + qty + "\n";
+            msg += "💵 *Precio Unitario:* $" + Number(currentProduct.price).toLocaleString('es-CL') + "\n";
             return msg;
         }
 
         function orderWhatsApp() {
             const msg = generateMessage();
             if (msg) {
-                window.open(`https://wa.me/56900000000?text=${msg}`, '_blank');
+                window.open("https://wa.me/56900000000?text=" + encodeURIComponent(msg), "_blank");
             }
         }
 
-
-
         // Initialize
-        document.addEventListener('DOMContentLoaded', loadProduct);
+        document.addEventListener('DOMContentLoaded', initProduct);
     </script>
 <!-- Footer -->
 
@@ -1228,6 +1283,11 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Hamburger Menu Toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
         // Initialize Animations
         AOS.init({
             duration: 800,
@@ -1238,11 +1298,9 @@
         // Navbar Scroll Effect
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.style.top = '10px';
-                navbar.querySelector('.navbar').style.background = 'rgba(10, 10, 15, 0.8)';
+            if (window.scrollY > 10) {
+                navbar.querySelector('.navbar').style.background = 'rgba(10, 10, 15, 0.95)';
             } else {
-                navbar.style.top = '2rem';
                 navbar.querySelector('.navbar').style.background = 'rgba(255, 255, 255, 0.03)';
             }
         });

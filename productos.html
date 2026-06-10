@@ -87,14 +87,15 @@
 
         /* Navigation */
         .navbar-wrapper {
-            position: fixed;
-            top: 2rem;
+            position: sticky;
+            top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
             display: flex;
             justify-content: center;
-            padding: 0 5%;
+            padding: 0;
+            background: var(--bg-color);
             transition: all 0.4s ease;
         }
 
@@ -103,9 +104,12 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            max-width: 1000px;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
+            max-width: 100%;
+            padding: 0.8rem 5%;
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            border-top: none;
         }
 
         .nav-logo img {
@@ -202,8 +206,9 @@
             position: relative;
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             padding-top: 5rem;
+            padding-bottom: 2rem;
             overflow: hidden;
         }
 
@@ -216,6 +221,10 @@
             object-fit: cover;
             z-index: 0;
             opacity: 0.8; /* Video más claro */
+        }
+
+        .mobile-video {
+            display: none;
         }
 
         .hero-overlay {
@@ -243,6 +252,7 @@
             max-width: 900px;
             margin: 0 auto;
             text-align: center;
+            width: 100%;
         }
 
         .hero-badge {
@@ -259,22 +269,22 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--text-muted);
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .hero-title {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 12vw, 9rem);
+            font-size: clamp(2.5rem, 8vw, 5rem);
             line-height: 0.9;
             letter-spacing: 0.02em;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .hero-desc {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
             color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 3rem;
+            max-width: 500px;
+            margin: 0 auto 1.5rem;
             font-weight: 300;
         }
 
@@ -443,6 +453,31 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             font-size: 0.9rem;
+        }
+
+        
+        /* Carousel */
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 2.5rem;
+            padding: 1rem 0 3rem 0;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+        .carousel-card {
+            flex: 0 0 85%;
+            max-width: 350px;
+            scroll-snap-align: center;
+        }
+        @media (min-width: 768px) {
+            .carousel-card {
+                flex: 0 0 calc(33.333% - 1.7rem);
+            }
         }
 
         /* Products Grid */
@@ -671,7 +706,7 @@
             padding: 8rem 0;
             text-align: center;
             position: relative;
-            background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 15%, transparent 85%, var(--bg-color) 100%), url('bg-texture.png') center/cover fixed;
+            background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 15%, transparent 85%, var(--bg-color) 100%), url('bg-ocean.png') center/cover fixed;
         }
         
         .cta-box {
@@ -783,9 +818,58 @@
             height: 35px;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            color: #fff;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
         @media (max-width: 768px) {
-            .navbar { padding: 1rem; }
-            .nav-links { display: none; }
+            .hero {
+                min-height: auto;
+                flex-direction: column;
+                padding-top: 0;
+            }
+            .hero-content {
+                padding: 1rem 1rem 3rem;
+            }
+            .desktop-video { display: none; }
+            .mobile-video { 
+                display: block; 
+                position: relative !important;
+                width: 100%;
+                height: auto !important;
+                object-fit: contain !important;
+            }
+            
+            .navbar { padding: 1rem; justify-content: space-between !important; }
+            .menu-toggle { display: block; }
+            .nav-links { 
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 1rem;
+                right: 1rem;
+                background: rgba(10, 10, 15, 0.95);
+                backdrop-filter: blur(10px);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                padding: 1.5rem;
+                margin-top: 0.5rem;
+                gap: 1rem;
+                text-align: center;
+            }
+            .nav-links.active { display: flex !important; }
             .hero-actions { flex-direction: column; }
             .btn { width: 100%; }
             .trust-grid { flex-direction: column; align-items: center; gap: 1rem; }
@@ -808,13 +892,18 @@
             <a href="megalodon_v2.html" class="nav-logo">
                 <img src="blanco.png" alt="Megalodon Surf Wax">
             </a>
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="megalodon_v2.html#beneficios">Beneficios</a>
-                <a href="#">Catálogo</a>
+                <a href="productos.html">Catálogo</a>
                 <a href="nosotros.html">Nosotros</a>
                 <a href="megalodon_v2.html#testimonios">Reseñas</a>
             </div>
-            <a href="#" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Comprar</a>
+            <div class="nav-right">
+                <a href="productos.html" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Comprar</a>
+                <button class="menu-toggle" id="menuToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
         </nav>
     </div>
 
@@ -827,93 +916,132 @@
         </div>
     </section>
 
-    <!-- Full Catalog -->
-    <section class="section" style="background: var(--bg-color);">
+    <!-- Filters and Full Catalog -->
+    <section class="section" style="background: var(--bg-color); padding-top: 2rem;">
         <div class="container">
-            <div class="products-grid">
-                
-                <!-- P1 -->
-                <div class="product-card glass-panel" data-aos="fade-up" data-aos-delay="100">
-                    <div class="product-image-container" style="background: url('wax_1.png') center/cover;">
-                        <div class="product-badge">Best Seller</div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-temp">Agua Fría (9° - 14°C)</div>
-                        <h3 class="product-title">Cold Water Wax</h3>
-                        <p class="product-desc">Fórmula artesanal 100% natural. Grip brutal para el Pacífico chileno.</p>
-                        <div class="product-footer">
-                            <div class="product-price">$4.990</div>
-                            <a href="producto.html?id=cold-wax" target="_blank" class="btn btn-primary" style="padding: 0.6rem 1.2rem;">Ver Detalles</a>
-                        </div>
-                    </div>
-                </div>
+            <!-- Dynamic Category Filter Buttons -->
+            <div id="categoryFilters" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;" data-aos="fade-up">
+                <!-- Injected dynamically by JS -->
+            </div>
 
-                <!-- P2 -->
-                <div class="product-card glass-panel" data-aos="fade-up" data-aos-delay="200">
-                    <div class="product-image-container" style="background: url('wax_2.png') center/cover;">
-                        <div class="product-badge">Nuevo</div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-temp">Agua Fresca (13° - 20°C)</div>
-                        <h3 class="product-title">Cool Water Wax</h3>
-                        <p class="product-desc">Para los días de verano. Más firme, ideal para agua fresca y viajes al norte.</p>
-                        <div class="product-footer">
-                            <div class="product-price">$4.990</div>
-                            <a href="producto.html?id=cool-wax" target="_blank" class="btn btn-outline" style="padding: 0.6rem 1.2rem;">Ver Detalles</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- P3 -->
-                <div class="product-card glass-panel" data-aos="fade-up" data-aos-delay="300" style="border-color: rgba(255,81,0,0.3);">
-                    <div class="product-image-container" style="background: url('wax_3.png') center/cover;">
-                        <div class="product-badge">Ahorro</div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-temp">Combina a tu gusto</div>
-                        <h3 class="product-title">Pack 3 Barras</h3>
-                        <p class="product-desc">Lleva 3 barras y ahorra. El pack del surfer que siempre tiene cera en la maleta.</p>
-                        <div class="product-footer">
-                            <div class="product-price">$12.900</div>
-                            <a href="producto.html?id=pack-3" target="_blank" class="btn btn-primary" style="padding: 0.6rem 1.2rem;">Ver Detalles</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- P4 -->
-                <div class="product-card glass-panel" data-aos="fade-up" data-aos-delay="400">
-                    <div class="product-image-container" style="background: url('bf88c491-03e3-42bd-8b4b-edc8245bcec8.png') center/cover;">
-                        <div class="product-badge">Apparel</div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-temp">S / M / L / XL</div>
-                        <h3 class="product-title">Polera Megalodon</h3>
-                        <p class="product-desc">Polera de algodón premium con logo vintage. Hecha para el post-surf.</p>
-                        <div class="product-footer">
-                            <div class="product-price">$18.990</div>
-                            <a href="producto.html?id=polera" target="_blank" class="btn btn-outline" style="padding: 0.6rem 1.2rem;">Ver Detalles</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- P5 -->
-                <div class="product-card glass-panel" data-aos="fade-up" data-aos-delay="500">
-                    <div class="product-image-container" style="background: url('leash_9.png') center/cover;">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-temp">Para tablas 8'–10'</div>
-                        <h3 class="product-title">Leash 9' Megalodon</h3>
-                        <p class="product-desc">Leash ultra resistente de 7mm para olas de hasta 2 metros. Seguridad total.</p>
-                        <div class="product-footer">
-                            <div class="product-price">$14.990</div>
-                            <a href="producto.html?id=leash" target="_blank" class="btn btn-outline" style="padding: 0.6rem 1.2rem;">Ver Detalles</a>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="products-grid" id="productsGrid" data-aos="fade-up" data-aos-delay="100">
+                <!-- Cards dynamically loaded -->
+                <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-muted);">Cargando catálogo...</div>
             </div>
         </div>
     </section>
+
+    <script>
+        let ALL_PRODUCTS = [];
+        let ACTIVE_CATEGORY = 'Todos';
+
+        async function initCatalog() {
+            try {
+                const res = await fetch('/api/products?t=' + Date.now());
+                if (res.ok) {
+                    ALL_PRODUCTS = await res.json();
+                } else {
+                    console.warn('API error, loading default products');
+                    ALL_PRODUCTS = getDefaultProducts();
+                }
+            } catch (err) {
+                console.error('Fetch error, loading default products', err);
+                ALL_PRODUCTS = getDefaultProducts();
+            }
+            
+            renderFilters();
+            renderProducts();
+        }
+
+        function getDefaultProducts() {
+            return [
+                { id: 1, name: 'Cold Water Wax', category: 'Ceras', price: 4990, compareAtPrice: null, description: 'Fórmula artesanal 100% natural. Grip brutal para el Pacífico chileno.', images: ['wax_1.png'], tags: ['Best Seller'], stock: 50, brand: 'MEGALODON', variants: [] },
+                { id: 2, name: 'Cool Water Wax', category: 'Ceras', price: 4990, compareAtPrice: null, description: 'Para los días de verano. Más firme, ideal para agua fresca y viajes al norte.', images: ['wax_2.png'], tags: ['Nuevo'], stock: 40, brand: 'MEGALODON', variants: [] },
+                { id: 3, name: 'Surf Pack: 3 Barras', category: 'Ceras', price: 12900, compareAtPrice: 14970, description: 'Lleva 3 barras y ahorra. El pack del surfer que siempre tiene cera en la maleta.', images: ['wax_3.png'], tags: ['Ahorro'], stock: 30, brand: 'MEGALODON', variants: [] },
+                { id: 4, name: 'Polera Megalodon', category: 'Apparel', price: 18990, compareAtPrice: 24990, description: 'Polera de algodón premium con logo vintage. Hecha para el post-surf.', images: ['bf88c491-03e3-42bd-8b4b-edc8245bcec8.png'], tags: ['Apparel'], stock: 20, brand: 'MEGALODON', variants: ['S', 'M', 'L', 'XL'] },
+                { id: 5, name: "Leash 9' Megalodon", category: 'Accesorios', price: 14990, compareAtPrice: 19990, description: 'Leash ultra resistente de 7mm para olas de hasta 2 metros. Seguridad total.', images: ['leash_9.png'], tags: ['Nuevo'], stock: 15, brand: 'MEGALODON', variants: [] }
+            ];
+        }
+
+        function renderFilters() {
+            const filterContainer = document.getElementById('categoryFilters');
+            let categories = [];
+            
+            // Extract unique categories from products list
+            categories = [...new Set(ALL_PRODUCTS.map(p => p.category))].filter(c => c);
+            
+            let html = `<button class="btn ${ACTIVE_CATEGORY === 'Todos' ? 'btn-primary' : 'btn-outline'}" onclick="filterCategory('Todos')" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Todos</button>`;
+            
+            categories.forEach(cat => {
+                html += `<button class="btn ${ACTIVE_CATEGORY === cat ? 'btn-primary' : 'btn-outline'}" onclick="filterCategory('${cat}')" style="padding: 0.6rem 1.5rem; font-size: 0.9rem; margin-left: 0.5rem;">${cat}</button>`;
+            });
+            
+            filterContainer.innerHTML = html;
+        }
+
+        function filterCategory(cat) {
+            ACTIVE_CATEGORY = cat;
+            renderFilters();
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const filtered = ACTIVE_CATEGORY === 'Todos' 
+                ? ALL_PRODUCTS 
+                : ALL_PRODUCTS.filter(p => p.category === ACTIVE_CATEGORY);
+                
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-muted);">No hay productos en esta categoría.</div>';
+                return;
+            }
+            
+            grid.innerHTML = filtered.map(p => {
+                const imgUrl = (p.images && p.images.length > 0) ? p.images[0] : 'logo.png';
+                const badge = (p.tags && p.tags.length > 0) ? p.tags[0] : '';
+                const badgeHtml = badge ? `<div class="product-badge">${badge}</div>` : '';
+                
+                // Construct subtitle (variants size list, or category, or brand)
+                let subtitle = p.brand || 'MEGALODON';
+                if (p.variants && p.variants.length > 0) {
+                    subtitle = p.variants.join(' / ');
+                } else if (p.category === 'Ceras') {
+                    if (p.name.toLowerCase().includes('cold')) {
+                        subtitle = 'Agua Fría (9° - 14°C)';
+                    } else if (p.name.toLowerCase().includes('cool')) {
+                        subtitle = 'Agua Fresca (13° - 20°C)';
+                    } else {
+                        subtitle = 'Combina a tu gusto';
+                    }
+                }
+                
+                const formattedPrice = '$' + Number(p.price).toLocaleString('es-CL');
+                
+                return `
+                    <div class="product-card glass-panel" data-aos="fade-up">
+                        <div class="product-image-container" style="background: url('${imgUrl}') center/cover; cursor: pointer;" onclick="window.location.href='producto.html?id=${p.id}'">
+                            ${badgeHtml}
+                        </div>
+                        <div class="product-info">
+                            <div class="product-temp">${subtitle}</div>
+                            <h3 class="product-title">${p.name}</h3>
+                            <p class="product-desc">${p.description}</p>
+                            <div class="product-footer">
+                                <div class="product-price">${formattedPrice}</div>
+                                <a href="producto.html?id=${p.id}" class="btn btn-primary" style="padding: 0.6rem 1.2rem;">Ver Detalle</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            if (window.AOS) {
+                AOS.refresh();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initCatalog);
+    </script>
 <!-- Footer -->
 
     <footer>
@@ -929,7 +1057,7 @@
                 <h4>Navegación</h4>
                 <ul>
                     <li><a href="megalodon_v2.html#beneficios">Beneficios</a></li>
-                    <li><a href="#">Catálogo Oficial</a></li>
+                    <li><a href="productos.html">Catálogo Oficial</a></li>
                     <li><a href="nosotros.html">Nosotros</a></li>
                     <li><a href="megalodon_v2.html#testimonios">Comunidad</a></li>
                 </ul>
@@ -957,6 +1085,11 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Hamburger Menu Toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
         // Initialize Animations
         AOS.init({
             duration: 800,
@@ -967,11 +1100,9 @@
         // Navbar Scroll Effect
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.style.top = '10px';
-                navbar.querySelector('.navbar').style.background = 'rgba(10, 10, 15, 0.8)';
+            if (window.scrollY > 10) {
+                navbar.querySelector('.navbar').style.background = 'rgba(10, 10, 15, 0.95)';
             } else {
-                navbar.style.top = '2rem';
                 navbar.querySelector('.navbar').style.background = 'rgba(255, 255, 255, 0.03)';
             }
         });
