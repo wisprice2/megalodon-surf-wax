@@ -154,6 +154,21 @@
             width: 100%;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            color: #fff;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
         /* Buttons */
         .btn {
             display: inline-flex;
@@ -784,8 +799,25 @@
         }
 
         @media (max-width: 768px) {
-            .navbar { padding: 1rem; }
-            .nav-links { display: none; }
+            .navbar { padding: 1rem; justify-content: space-between !important; }
+            .menu-toggle { display: block; }
+            .nav-links { 
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 1rem;
+                right: 1rem;
+                background: rgba(10, 10, 15, 0.95);
+                backdrop-filter: blur(10px);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                padding: 1.5rem;
+                margin-top: 0.5rem;
+                gap: 1rem;
+                text-align: center;
+            }
+            .nav-links.active { display: flex !important; }
             .hero-actions { flex-direction: column; }
             .btn { width: 100%; }
             .trust-grid { flex-direction: column; align-items: center; gap: 1rem; }
@@ -807,13 +839,19 @@
             <a href="index.html" class="nav-logo">
                 <img src="blanco.png" alt="Megalodon Surf Wax">
             </a>
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
+                <a href="admin.html">Acceso</a>
                 <a href="index.html#beneficios">Beneficios</a>
                 <a href="index.html#productos">Catálogo</a>
                 <a href="#">Nosotros</a>
                 <a href="index.html#testimonios">Reseñas</a>
             </div>
-            <a href="index.html#productos" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Comprar</a>
+            <div class="nav-right">
+                <a href="index.html#productos" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Comprar</a>
+                <button class="menu-toggle" id="menuToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
         </nav>
     </div>
 
@@ -899,6 +937,11 @@
             duration: 800,
             once: true,
             offset: 50,
+        });
+
+        // Hamburger Menu Toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
         });
 
         // Navbar Scroll Effect
