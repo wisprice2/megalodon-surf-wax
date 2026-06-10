@@ -576,13 +576,50 @@
             justify-content: space-between;
             align-items: center;
             margin-top: auto;
+            gap: 1.2rem;
+            flex-wrap: wrap;
         }
 
         .product-price {
             font-family: var(--font-display);
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: #fff;
             line-height: 1;
+        }
+
+        /* Category Filter Dropdown */
+        .category-select {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            color: var(--text-main);
+            padding: 0.6rem 2.5rem 0.6rem 1.5rem;
+            font-size: 0.9rem;
+            font-family: var(--font-body);
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff5100' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2rem;
+            min-width: 160px;
+        }
+
+        .category-select:hover, .category-select:focus {
+            border-color: var(--accent-primary);
+            background-color: rgba(255, 81, 0, 0.05);
+            box-shadow: 0 0 15px rgba(255, 81, 0, 0.2);
+        }
+
+        .category-select option {
+            background: #0a0a0f;
+            color: #fff;
+            padding: 1rem;
         }
 
         /* Comparison Table */

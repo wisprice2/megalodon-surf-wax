@@ -576,13 +576,50 @@
             justify-content: space-between;
             align-items: center;
             margin-top: auto;
+            gap: 1.2rem;
+            flex-wrap: wrap;
         }
 
         .product-price {
             font-family: var(--font-display);
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: #fff;
             line-height: 1;
+        }
+
+        /* Category Filter Dropdown */
+        .category-select {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            color: var(--text-main);
+            padding: 0.6rem 2.5rem 0.6rem 1.5rem;
+            font-size: 0.9rem;
+            font-family: var(--font-body);
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff5100' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2rem;
+            min-width: 160px;
+        }
+
+        .category-select:hover, .category-select:focus {
+            border-color: var(--accent-primary);
+            background-color: rgba(255, 81, 0, 0.05);
+            box-shadow: 0 0 15px rgba(255, 81, 0, 0.2);
+        }
+
+        .category-select option {
+            background: #0a0a0f;
+            color: #fff;
+            padding: 1rem;
         }
 
         /* Comparison Table */
@@ -889,7 +926,7 @@
     <!-- Navigation -->
     <div class="navbar-wrapper" id="navbar">
         <nav class="navbar glass-panel">
-            <a href="index.html" class="nav-logo">
+            <a href="#" class="nav-logo">
                 <img src="blanco.png" alt="Megalodon Surf Wax">
             </a>
             <div class="nav-links" id="navLinks">
@@ -1082,7 +1119,7 @@
     <section class="section pdp-container">
         <div class="container">
             <div class="breadcrumb" id="pdpBreadcrumb">
-                <a href="index.html">Inicio</a> / <a href="productos.html">Catálogo</a> / <span id="bcCategory">...</span>
+                <a href="megalodon_v2.html">Inicio</a> / <a href="productos.html">Catálogo</a> / <span id="bcCategory">...</span>
             </div>
 
             <div class="pdp-grid">
@@ -1224,10 +1261,10 @@
             }
             const qty = document.getElementById('pdpQty').value;
             let msg = "Hola! Quiero pedir el producto desde la web:\n\n";
-            msg += "📦 *Producto:* " + currentProduct.name + "\n";
-            if (selectedSize) msg += "📏 *Opción/Talla:* " + selectedSize + "\n";
-            msg += "🔢 *Cantidad:* " + qty + "\n";
-            msg += "💵 *Precio Unitario:* $" + Number(currentProduct.price).toLocaleString('es-CL') + "\n";
+            msg += "\u{1F4E6} *Producto:* " + currentProduct.name + "\n";
+            if (selectedSize) msg += "\u{1F4CF} *Opción/Talla:* " + selectedSize + "\n";
+            msg += "\u{1F522} *Cantidad:* " + qty + "\n";
+            msg += "\u{1F4B5} *Precio Unitario:* $" + Number(currentProduct.price).toLocaleString('es-CL') + "\n";
             return msg;
         }
 
