@@ -616,6 +616,16 @@
             .grid-2 {
                 grid-template-columns: 1fr;
             }
+            .modal {
+                padding: 1rem;
+            }
+            .modal-card {
+                padding: 1.5rem;
+            }
+            .modal-card h3 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
         }
 
         /* Image upload area */
@@ -815,6 +825,7 @@
                 <a href="index.html#testimonios">Reseñas</a>
             </div>
             <div class="nav-right">
+                <button class="logout-btn" id="changePassBtn" style="display: none; margin-right: 0.5rem;" onclick="openPasswordModal()">Cambiar Contraseña</button>
                 <button class="logout-btn" id="logoutBtn" style="display: none;" onclick="logout()">Cerrar Sesión</button>
                 <button class="menu-toggle" id="menuToggle">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -1049,7 +1060,8 @@
         async function showDashboard() {
             document.getElementById('loginContainer').style.display = 'none';
             document.getElementById('dashboardContainer').style.display = 'block';
-            document.getElementById('logoutBtn').style.display = 'block';
+            document.getElementById('changePassBtn').style.display = 'inline-block';
+            document.getElementById('logoutBtn').style.display = 'inline-block';
             
             await loadData();
         }
@@ -1545,6 +1557,88 @@
         document.getElementById('menuToggle').addEventListener('click', function() {
             document.getElementById('navLinks').classList.toggle('active');
         });
+    </script>
+    <!-- MODAL: CAMBIAR CONTRASEÑA -->
+    <div class="modal" id="passwordModal">
+        <div class="modal-card glass-panel" data-aos="zoom-in" data-aos-duration="300">
+            <button class="close-modal-btn" onclick="closePasswordModal()">&times;</button>
+            <h3 style="margin-bottom: 1.5rem;">Cambiar Contraseña</h3>
+            
+            <form id="passwordForm" onsubmit="handlePasswordChange(event)">
+                <div class="form-group">
+                    <label>Contraseña Actual</label>
+                    <input type="password" id="currentPass" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Nueva Contraseña</label>
+                    <input type="password" id="newPass" class="form-control" minlength="6" placeholder="Mínimo 6 caracteres" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirmar Nueva Contraseña</label>
+                    <input type="password" id="confirmPass" class="form-control" minlength="6" required>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button type="button" class="btn btn-secondary" style="flex:1;" onclick="closePasswordModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" style="flex:1;" id="savePassBtn">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openPasswordModal() {
+            document.getElementById('passwordModal').style.display = 'flex';
+            document.getElementById('passwordForm').reset();
+        }
+
+        function closePasswordModal() {
+            document.getElementById('passwordModal').style.display = 'none';
+        }
+
+        async function handlePasswordChange(e) {
+            e.preventDefault();
+            const currentPass = document.getElementById('currentPass').value;
+            const newPass = document.getElementById('newPass').value;
+            const confirmPass = document.getElementById('confirmPass').value;
+
+            if (newPass !== confirmPass) {
+                alert('Las contraseñas nuevas no coinciden.');
+                return;
+            }
+
+            const btn = document.getElementById('savePassBtn');
+            btn.textContent = 'Guardando...';
+            btn.disabled = true;
+
+            try {
+                const token = sessionStorage.getItem('dragons_admin_token') || '';
+                const res = await fetch('/api/products?action=change_password', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({ currentPassword: currentPass, newPassword: newPass })
+                });
+
+                const data = await res.json();
+                
+                if (data.success) {
+                    alert('Contraseña cambiada exitosamente. Debes iniciar sesión nuevamente.');
+                    closePasswordModal();
+                    logout();
+                } else {
+                    alert('Error: ' + (data.error || 'No se pudo cambiar la contraseña.'));
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Error de conexión al servidor.');
+            } finally {
+                btn.textContent = 'Guardar';
+                btn.disabled = false;
+            }
+        }
     </script>
 </body>
 </html>
