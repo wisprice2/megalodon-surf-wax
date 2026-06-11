@@ -33,6 +33,15 @@ async function run() {
       );
     `);
 
+    console.log("Creando tabla 'admin_settings' si no existe...");
+    await sql(`
+      CREATE TABLE IF NOT EXISTS admin_settings (
+          id INT PRIMARY KEY,
+          password_hash TEXT NOT NULL,
+          updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
+      );
+    `);
+
     console.log("Creando tabla 'products' si no existe...");
     await sql(`
       CREATE TABLE IF NOT EXISTS products (
@@ -97,6 +106,16 @@ async function run() {
     }
 
     console.log("Base de datos inicializada correctamente.");
+    
+    // Configurar contraseña inicial si admin_settings está vacío
+    const existingAdmin = await sql('SELECT count(*) as count FROM admin_settings');
+    if (parseInt(existingAdmin[0].count) === 0) {
+      console.log("Configurando contraseña de admin por defecto...");
+      const crypto = await import('crypto');
+      const defaultPass = process.env.ADMIN_PASSWORD || 'Surfwax';
+      const defaultHash = crypto.createHash('sha256').update(defaultPass).digest('hex');
+      await sql('INSERT INTO admin_settings (id, password_hash) VALUES (1, $1)', [defaultHash]);
+    }
     
     // Verificación final
     const catsResult = await sql('SELECT * FROM categories');
