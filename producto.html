@@ -993,7 +993,7 @@
         .pdp-image-col img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
         .pdp-title {
             font-family: 'Bebas Neue', sans-serif;
@@ -1131,6 +1131,7 @@
                 <!-- Imagen -->
                 <div class="pdp-image-col glass-panel" data-aos="fade-right">
                     <img id="pdpImage" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Producto" style="opacity: 0; transition: opacity 0.3s ease;">
+                    <div id="pdpThumbnails" style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; justify-content:center;"></div>
                 </div>
 
                 <!-- Detalles -->
@@ -1221,6 +1222,15 @@
             const imgEl = document.getElementById('pdpImage');
             imgEl.onload = function() { imgEl.style.opacity = '1'; };
             imgEl.src = imgUrl;
+
+            const thumbsContainer = document.getElementById('pdpThumbnails');
+            if (currentProduct.images && currentProduct.images.length > 1) {
+                thumbsContainer.innerHTML = currentProduct.images.map((img, i) => `
+                    <img src="${img}" alt="thumb" style="width:60px; height:60px; object-fit:contain; border-radius:8px; cursor:pointer; background: rgba(255,255,255,0.05); border: 2px solid ${i === 0 ? 'var(--orange)' : 'transparent'}; transition: border-color 0.3s;" onclick="document.getElementById('pdpImage').src='${img}'; Array.from(this.parentNode.children).forEach(c => c.style.borderColor='transparent'); this.style.borderColor='var(--orange)';">
+                `).join('');
+            } else {
+                thumbsContainer.innerHTML = '';
+            }
             document.getElementById('pdpTitle').textContent = currentProduct.name;
             
             document.getElementById('pdpPrice').textContent = '$' + Number(currentProduct.price).toLocaleString('es-CL');
