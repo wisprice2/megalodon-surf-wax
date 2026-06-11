@@ -87,14 +87,15 @@
 
         /* Navigation */
         .navbar-wrapper {
-            position: fixed;
-            top: 2rem;
+            position: sticky;
+            top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
             display: flex;
             justify-content: center;
-            padding: 0 5%;
+            padding: 0;
+            background: var(--bg-color);
             transition: all 0.4s ease;
         }
 
@@ -103,9 +104,12 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            max-width: 1000px;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
+            max-width: 100%;
+            padding: 0.8rem 5%;
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            border-top: none;
         }
 
         .nav-logo img {
@@ -825,13 +829,9 @@
             .about-stats { padding: 2rem; }
         }
     </style>
+    <link rel="stylesheet" href="mobile.css">
 </head>
 <body>
-
-    <!-- Top Bar -->
-    <div class="top-bar">
-        🔥 Envío Gratis a Todo Chile por compras sobre $30.000 🔥
-    </div>
 
     <!-- Navigation -->
     <div class="navbar-wrapper" id="navbar">
@@ -929,6 +929,7 @@
     </a>
 
     <!-- Scripts -->
+    <script src="cart.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Initialize Animations
@@ -946,11 +947,9 @@
         // Navbar Scroll Effect
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.style.top = '10px';
-                navbar.querySelector('.navbar').style.background = 'rgba(10, 10, 15, 0.8)';
+            if (window.scrollY > 10) {
+                navbar.querySelector('.navbar').style.background = 'rgba(10, 10, 15, 0.95)';
             } else {
-                navbar.style.top = '2rem';
                 navbar.querySelector('.navbar').style.background = 'rgba(255, 255, 255, 0.03)';
             }
         });

@@ -923,11 +923,6 @@
 </head>
 <body>
 
-    <!-- Top Bar -->
-    <div class="top-bar">
-        🔥 Envío Gratis a Todo Chile por compras sobre $30.000 🔥
-    </div>
-
     <!-- Navigation -->
     <div class="navbar-wrapper" id="navbar">
         <nav class="navbar glass-panel">
@@ -1170,7 +1165,7 @@
 
                     <!-- Botones -->
                     <div class="pdp-actions">
-                        <button class="btn btn-green" onclick="orderWhatsApp()">Pedir por WhatsApp</button>
+                        <button class="btn btn-green" onclick="addToCart()">Agregar al carrito</button>
                     </div>
                 </div>
             </div>
@@ -1287,11 +1282,13 @@
             return msg;
         }
 
-        function orderWhatsApp() {
-            const msg = generateMessage();
-            if (msg) {
-                window.open("https://wa.me/56995068979?text=" + encodeURIComponent(msg), "_blank");
+        function addToCart() {
+            if (currentProduct.variants && currentProduct.variants.length > 0 && !selectedSize) {
+                alert('Por favor selecciona una talla/opción primero.');
+                return;
             }
+            const qty = parseInt(document.getElementById('pdpQty').value);
+            Cart.add(currentProduct, qty, selectedSize);
         }
 
         // Initialize
@@ -1338,6 +1335,7 @@
     </a>
 
     <!-- Scripts -->
+    <script src="cart.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Hamburger Menu Toggle
