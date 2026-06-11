@@ -985,6 +985,7 @@
             border-radius: 16px;
             aspect-ratio: 4/5;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             overflow: hidden;
@@ -992,7 +993,9 @@
         }
         .pdp-image-col img {
             width: 100%;
-            height: 100%;
+            flex: 1;
+            min-height: 0;
+            padding-top: 20px;
             object-fit: contain;
         }
         .pdp-title {
@@ -1130,8 +1133,8 @@
             <div class="pdp-grid">
                 <!-- Imagen -->
                 <div class="pdp-image-col glass-panel" data-aos="fade-right">
-                    <img id="pdpImage" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Producto" style="opacity: 0; transition: opacity 0.3s ease;">
-                    <div id="pdpThumbnails" style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; justify-content:center;"></div>
+                    <img id="pdpImage" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Producto" style="opacity: 0; transition: opacity 0.3s ease; flex-grow: 1;">
+                    <div id="pdpThumbnails" style="display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; justify-content:center;"></div>
                 </div>
 
                 <!-- Detalles -->
