@@ -1057,6 +1057,33 @@
             color: var(--black);
         }
 
+        .color-swatch {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.15);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+            text-transform: uppercase;
+        }
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+        .color-swatch.active {
+            border-color: #fff;
+            outline: 2px solid var(--orange);
+            outline-offset: 2px;
+        }
+
         .qty-selector {
             display: inline-flex;
             align-items: center;
@@ -1148,9 +1175,25 @@
                     </div>
 
                     <!-- Tallas (Solo Ropa) -->
-                    <div id="pdpSizesWrapper" style="display: none;">
+                    <div id="pdpSizesWrapper" style="display: none; margin-bottom: 1.5rem;">
                         <span class="pdp-meta-label">Opciones / Tallas</span>
                         <div class="size-selector" id="pdpSizes">
+                            <!-- Generado dinámicamente -->
+                        </div>
+                    </div>
+
+                    <!-- Colores del Polerón (Circular Swatches) -->
+                    <div id="pdpHoodieColorsWrapper" style="display: none; margin-bottom: 1.5rem;">
+                        <span class="pdp-meta-label">Color del Polerón: <span id="selectedHoodieColorText" style="color: var(--orange); font-weight: 600; text-transform: none; letter-spacing: 0;">Selecciona un color</span></span>
+                        <div class="color-selector" id="pdpHoodieColors" style="display: flex; gap: 0.8rem; margin-top: 0.5rem; flex-wrap: wrap;">
+                            <!-- Generado dinámicamente -->
+                        </div>
+                    </div>
+
+                    <!-- Colores del Logo (Circular Swatches) -->
+                    <div id="pdpLogoColorsWrapper" style="display: none; margin-bottom: 1.5rem;">
+                        <span class="pdp-meta-label">Color del Logo / Diseño: <span id="selectedLogoColorText" style="color: var(--orange); font-weight: 600; text-transform: none; letter-spacing: 0;">Selecciona un color</span></span>
+                        <div class="color-selector" id="pdpLogoColors" style="display: flex; gap: 0.8rem; margin-top: 0.5rem; flex-wrap: wrap;">
                             <!-- Generado dinámicamente -->
                         </div>
                     </div>
@@ -1176,6 +1219,49 @@
         let ALL_PRODUCTS = [];
         let currentProduct = null;
         let selectedSize = '';
+        let selectedHoodieColor = '';
+        let selectedLogoColor = '';
+
+        const COLOR_MAP = {
+            "crema": "#f5e6d3",
+            "mostaza": "#e1ad01",
+            "burdeo": "#6b0029",
+            "celeste": "#80d4f2",
+            "salmón": "#e78060",
+            "salmon": "#e78060",
+            "morado": "#8a2be2",
+            "rosa viejo": "#cfa0b5",
+            "rosado": "#ec79c4",
+            "verde": "#00a854",
+            "verde musgo": "#8da87e",
+            "vino": "#5c061e",
+            "amarillo": "#fcd116",
+            "azul marino": "#002f6c",
+            "blanco": "#ffffff",
+            "turquesa": "#25a4c4",
+            "gris claro": "#d3d3d3",
+            "gris oscuro": "#4c4c4c",
+            "naranja": "#ff7900",
+            "negro": "#111111",
+            "rojo": "#ff0000",
+            "menta": "#61c4b3",
+            "azul": "#103eb3",
+            "fucsia": "#db2d71",
+            "dorado": "#ffd700",
+            "plateado": "#c0c0c0"
+        };
+
+        function getSwatchStyle(colorName) {
+            const clean = colorName.toLowerCase().trim();
+            if (COLOR_MAP[clean]) {
+                const borderVal = clean === 'blanco' ? 'border: 2px solid rgba(255,255,255,0.4);' : '';
+                return `background-color: ${COLOR_MAP[clean]}; ${borderVal}`;
+            }
+            if (clean.startsWith('#')) {
+                return `background-color: ${colorName};`;
+            }
+            return `background: linear-gradient(135deg, #444, #222);`;
+        }
 
         async function initProduct() {
             try {
@@ -1253,12 +1339,56 @@
             } else {
                 sizeWrap.style.display = 'none';
             }
+
+            // Hoodie colors
+            const hoodieColorWrap = document.getElementById('pdpHoodieColorsWrapper');
+            const hoodieColorContainer = document.getElementById('pdpHoodieColors');
+            if (currentProduct.hoodieColors && currentProduct.hoodieColors.length > 0) {
+                hoodieColorWrap.style.display = 'block';
+                hoodieColorContainer.innerHTML = currentProduct.hoodieColors.map(c => {
+                    const style = getSwatchStyle(c);
+                    const clean = c.toLowerCase().trim();
+                    const showText = !COLOR_MAP[clean] && !clean.startsWith('#') ? c.charAt(0) : '';
+                    return `<div class="color-swatch" style="${style}" title="${c}" onclick="selectHoodieColor('${c}', this)">${showText}</div>`;
+                }).join('');
+            } else {
+                hoodieColorWrap.style.display = 'none';
+            }
+
+            // Logo colors
+            const logoColorWrap = document.getElementById('pdpLogoColorsWrapper');
+            const logoColorContainer = document.getElementById('pdpLogoColors');
+            if (currentProduct.logoColors && currentProduct.logoColors.length > 0) {
+                logoColorWrap.style.display = 'block';
+                logoColorContainer.innerHTML = currentProduct.logoColors.map(c => {
+                    const style = getSwatchStyle(c);
+                    const clean = c.toLowerCase().trim();
+                    const showText = !COLOR_MAP[clean] && !clean.startsWith('#') ? c.charAt(0) : '';
+                    return `<div class="color-swatch" style="${style}" title="${c}" onclick="selectLogoColor('${c}', this)">${showText}</div>`;
+                }).join('');
+            } else {
+                logoColorWrap.style.display = 'none';
+            }
         }
 
         function selectSize(size, btn) {
             selectedSize = size;
             document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+        }
+
+        function selectHoodieColor(color, el) {
+            selectedHoodieColor = color;
+            document.getElementById('selectedHoodieColorText').textContent = color;
+            el.parentNode.querySelectorAll('.color-swatch').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function selectLogoColor(color, el) {
+            selectedLogoColor = color;
+            document.getElementById('selectedLogoColorText').textContent = color;
+            el.parentNode.querySelectorAll('.color-swatch').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
         }
 
         function updateQty(change) {
@@ -1268,27 +1398,21 @@
             input.value = val;
         }
 
-        function generateMessage() {
-            if (currentProduct.variants && currentProduct.variants.length > 0 && !selectedSize) {
-                alert('Por favor selecciona una talla/opción primero.');
-                return null;
-            }
-            const qty = document.getElementById('pdpQty').value;
-            let msg = "Hola! Quiero pedir el producto desde la web:\n\n";
-            msg += "- *Producto:* " + currentProduct.name + "\n";
-            if (selectedSize) msg += "- *Opción/Talla:* " + selectedSize + "\n";
-            msg += "- *Cantidad:* " + qty + "\n";
-            msg += "- *Precio Unitario:* $" + Number(currentProduct.price).toLocaleString('es-CL') + "\n";
-            return msg;
-        }
-
         function addToCart() {
             if (currentProduct.variants && currentProduct.variants.length > 0 && !selectedSize) {
                 alert('Por favor selecciona una talla/opción primero.');
                 return;
             }
+            if (currentProduct.hoodieColors && currentProduct.hoodieColors.length > 0 && !selectedHoodieColor) {
+                alert('Por favor selecciona un color de polerón primero.');
+                return;
+            }
+            if (currentProduct.logoColors && currentProduct.logoColors.length > 0 && !selectedLogoColor) {
+                alert('Por favor selecciona un color de diseño/logo primero.');
+                return;
+            }
             const qty = parseInt(document.getElementById('pdpQty').value);
-            Cart.add(currentProduct, qty, selectedSize);
+            Cart.add(currentProduct, qty, selectedSize, selectedHoodieColor, selectedLogoColor);
         }
 
         // Initialize
@@ -1357,6 +1481,50 @@
                 navbar.querySelector('.navbar').style.background = 'rgba(10, 10, 15, 0.95)';
             } else {
                 navbar.querySelector('.navbar').style.background = 'rgba(255, 255, 255, 0.03)';
+            }
+        });
+
+        // Load Products for Carousel dynamically
+        document.addEventListener('DOMContentLoaded', async () => {
+            const carousel = document.getElementById('homeCarousel');
+            if (!carousel) return;
+            try {
+                const res = await fetch('/api/products?t=' + Date.now());
+                if (res.ok) {
+                    const products = await res.json();
+                    if (products.length > 0) {
+                        carousel.innerHTML = products.slice(0, 4).map((p, idx) => {
+                            const imgUrl = (p.images && p.images.length > 0) ? p.images[0] : 'logo.png';
+                            let badgeHtml = '';
+                            if (p.tags && p.tags.length > 0) {
+                                badgeHtml = `<div class="product-badge">${p.tags[0].toUpperCase()}</div>`;
+                            } else if (idx === 0) {
+                                badgeHtml = `<div class="product-badge">Destacado</div>`;
+                            }
+
+                            const btnClass = (idx % 2 !== 0) ? 'btn-primary' : 'btn-outline';
+                            const borderColorStyle = (idx % 2 !== 0) ? 'style="border-color: rgba(255,81,0,0.3);"' : '';
+
+                            return `
+                            <div class="product-card carousel-card glass-panel" data-aos="fade-up" data-aos-delay="${(idx % 3 + 1) * 100}" ${borderColorStyle}>
+                                <div class="product-image-container" style="background: url('${imgUrl}') center/cover; aspect-ratio: 4/5;">
+                                    ${badgeHtml}
+                                </div>
+                                <div class="product-info" style="text-align: center;">
+                                    <h3 class="product-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">${p.name}</h3>
+                                    <p class="product-desc" style="margin-bottom: 1.5rem;">${p.description ? (p.description.substring(0, 80) + (p.description.length > 80 ? '...' : '')) : ''}</p>
+                                    <a href="producto.html?id=${p.id}" class="btn ${btnClass}" style="width: 100%;">Descubrir Producto</a>
+                                </div>
+                            </div>
+                            `;
+                        }).join('');
+                    } else {
+                        carousel.innerHTML = '<div style="text-align: center; width: 100%; color: var(--text-muted); padding: 2rem;">Próximamente nuevas fórmulas...</div>';
+                    }
+                }
+            } catch (e) {
+                console.error("Error loading products for carousel:", e);
+                carousel.innerHTML = '<div style="text-align: center; width: 100%; color: var(--text-muted); padding: 2rem;">Error al cargar las fórmulas. Intenta recargar la página.</div>';
             }
         });
     </script>

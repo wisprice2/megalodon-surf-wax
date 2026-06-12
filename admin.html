@@ -1006,6 +1006,52 @@
                     </div>
                 </div>
 
+                <!-- Hoodie Colors Manager -->
+                <div class="form-group">
+                    <label>Colores del Polerón</label>
+                    <div class="variants-input-container">
+                        <div id="hoodieColorsContainer" style="display: inline-flex; flex-wrap: wrap; gap: 6px;">
+                            <!-- Injected by JS -->
+                        </div>
+                        <input type="text" class="variant-tag-input" id="hoodieColorInput" placeholder="Añadir color..." onkeydown="handleHoodieColorInput(event)">
+                    </div>
+                    <div class="preset-variants">
+                        <span style="font-size: 0.8rem; color: var(--text-muted); align-self: center;">Predefinidos: </span>
+                        <span class="preset-badge" onclick="addPresetHoodieColor('Negro')">Negro</span>
+                        <span class="preset-badge" onclick="addPresetHoodieColor('Blanco')">Blanco</span>
+                        <span class="preset-badge" onclick="addPresetHoodieColor('Crema')">Crema</span>
+                        <span class="preset-badge" onclick="addPresetHoodieColor('Gris Claro')">Gris Claro</span>
+                        <span class="preset-badge" onclick="addPresetHoodieColor('Gris Oscuro')">Gris Oscuro</span>
+                        <span class="preset-badge" onclick="addPresetHoodieColor('Burdeo')">Burdeo</span>
+                        <span class="preset-badge" onclick="addPresetHoodieColor('Azul Marino')">Azul Marino</span>
+                        <span class="preset-badge" onclick="addPresetHoodieColor('Rojo')">Rojo</span>
+                        <span class="preset-badge" onclick="addPresetHoodieColor('Verde Musgo')">Verde Musgo</span>
+                    </div>
+                </div>
+
+                <!-- Logo Colors Manager -->
+                <div class="form-group">
+                    <label>Colores de Diseño / Logo (Espalda)</label>
+                    <div class="variants-input-container">
+                        <div id="logoColorsContainer" style="display: inline-flex; flex-wrap: wrap; gap: 6px;">
+                            <!-- Injected by JS -->
+                        </div>
+                        <input type="text" class="variant-tag-input" id="logoColorInput" placeholder="Añadir color..." onkeydown="handleLogoColorInput(event)">
+                    </div>
+                    <div class="preset-variants">
+                        <span style="font-size: 0.8rem; color: var(--text-muted); align-self: center;">Predefinidos: </span>
+                        <span class="preset-badge" onclick="addPresetLogoColor('Negro')">Negro</span>
+                        <span class="preset-badge" onclick="addPresetLogoColor('Blanco')">Blanco</span>
+                        <span class="preset-badge" onclick="addPresetLogoColor('Rojo')">Rojo</span>
+                        <span class="preset-badge" onclick="addPresetLogoColor('Naranja')">Naranja</span>
+                        <span class="preset-badge" onclick="addPresetLogoColor('Amarillo')">Amarillo</span>
+                        <span class="preset-badge" onclick="addPresetLogoColor('Verde')">Verde</span>
+                        <span class="preset-badge" onclick="addPresetLogoColor('Azul')">Azul</span>
+                        <span class="preset-badge" onclick="addPresetLogoColor('Dorado')">Dorado</span>
+                        <span class="preset-badge" onclick="addPresetLogoColor('Plateado')">Plateado</span>
+                    </div>
+                </div>
+
                 <!-- Image Uploader -->
                 <div class="image-upload-wrapper">
                     <label>Imágenes del Producto</label>
@@ -1039,6 +1085,8 @@
         let ORIGINAL_PRODUCTS = [];
         let ORIGINAL_CATEGORIES = [];
         let currentVariants = [];
+        let currentHoodieColors = [];
+        let currentLogoColors = [];
         let currentImages = [];
         let hasChanges = false;
 
@@ -1305,15 +1353,21 @@
                 document.getElementById('pTags').value = prod.tags ? prod.tags.join(', ') : '';
                 
                 currentVariants = prod.variants ? [...prod.variants] : [];
+                currentHoodieColors = prod.hoodieColors ? [...prod.hoodieColors] : [];
+                currentLogoColors = prod.logoColors ? [...prod.logoColors] : [];
                 currentImages = prod.images ? [...prod.images] : [];
             } else {
                 document.getElementById('modalTitle').textContent = 'Nuevo Producto';
                 document.getElementById('editProductId').value = '';
                 document.getElementById('pBrand').value = 'MEGALODON';
                 document.getElementById('pStock').value = 10;
+                currentHoodieColors = [];
+                currentLogoColors = [];
             }
 
             renderVariants();
+            renderHoodieColors();
+            renderLogoColors();
             renderImages();
             modal.classList.add('active');
         }
@@ -1360,6 +1414,8 @@
                         ...PRODUCTS[idx],
                         name, category, price, compareAtPrice, stock, brand, description, tags,
                         variants: currentVariants,
+                        hoodieColors: currentHoodieColors,
+                        logoColors: currentLogoColors,
                         images: currentImages
                     };
                 }
@@ -1370,6 +1426,8 @@
                     id: newId,
                     name, category, price, compareAtPrice, stock, brand, description, tags,
                     variants: currentVariants,
+                    hoodieColors: currentHoodieColors,
+                    logoColors: currentLogoColors,
                     images: currentImages
                 });
             }
@@ -1412,6 +1470,76 @@
         function removeVariant(val) {
             currentVariants = currentVariants.filter(v => v !== val);
             renderVariants();
+        }
+
+        // Hoodie Colors Tag Manager
+        function renderHoodieColors() {
+            const container = document.getElementById('hoodieColorsContainer');
+            container.innerHTML = currentHoodieColors.map(c => `
+                <span class="variant-tag">
+                    ${c}
+                    <button type="button" onclick="removeHoodieColor('${c}')">×</button>
+                </span>
+            `).join('');
+        }
+
+        function handleHoodieColorInput(e) {
+            if (e.key === 'Enter' || e.key === ',') {
+                e.preventDefault();
+                const val = e.target.value.trim().replace(',', '');
+                if (val && !currentHoodieColors.includes(val)) {
+                    currentHoodieColors.push(val);
+                    e.target.value = '';
+                    renderHoodieColors();
+                }
+            }
+        }
+
+        function addPresetHoodieColor(val) {
+            if (!currentHoodieColors.includes(val)) {
+                currentHoodieColors.push(val);
+                renderHoodieColors();
+            }
+        }
+
+        function removeHoodieColor(val) {
+            currentHoodieColors = currentHoodieColors.filter(c => c !== val);
+            renderHoodieColors();
+        }
+
+        // Logo Colors Tag Manager
+        function renderLogoColors() {
+            const container = document.getElementById('logoColorsContainer');
+            container.innerHTML = currentLogoColors.map(c => `
+                <span class="variant-tag">
+                    ${c}
+                    <button type="button" onclick="removeLogoColor('${c}')">×</button>
+                </span>
+            `).join('');
+        }
+
+        function handleLogoColorInput(e) {
+            if (e.key === 'Enter' || e.key === ',') {
+                e.preventDefault();
+                const val = e.target.value.trim().replace(',', '');
+                if (val && !currentLogoColors.includes(val)) {
+                    currentLogoColors.push(val);
+                    e.target.value = '';
+                    renderLogoColors();
+                }
+            }
+        }
+
+        function addPresetLogoColor(val) {
+            if (!currentLogoColors.includes(val)) {
+                currentLogoColors.push(val);
+                renderLogoColors();
+            }
+        }
+
+        function removeLogoColor(val) {
+            currentLogoColors = currentLogoColors.filter(c => c !== val);
+            renderLogoColors();
         }
 
         // Images Manager and Multipart Uploader

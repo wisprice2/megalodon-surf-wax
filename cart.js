@@ -21,9 +21,12 @@ const Cart = {
         this.updateUI();
     },
     
-    add(product, qty, size) {
+    add(product, qty, size, hoodieColor, logoColor) {
         // Generar un ID único para el ítem en el carrito
-        const cartItemId = product.id + (size ? '_' + size : '');
+        const cartItemId = product.id + 
+            (size ? '_' + size : '') + 
+            (hoodieColor ? '_' + hoodieColor : '') + 
+            (logoColor ? '_' + logoColor : '');
         
         const existing = this.items.find(i => i.cartItemId === cartItemId);
         if (existing) {
@@ -38,7 +41,9 @@ const Cart = {
                     image: (product.images && product.images.length > 0) ? product.images[0] : 'logo.png'
                 },
                 qty,
-                size
+                size,
+                hoodieColor,
+                logoColor
             });
         }
         this.save();
@@ -74,7 +79,11 @@ const Cart = {
         
         this.items.forEach(item => {
             msg += `- ${item.qty}x ${item.product.name}`;
-            if (item.size) msg += ` (Talla: ${item.size})`;
+            let details = [];
+            if (item.size) details.push(`Talla: ${item.size}`);
+            if (item.hoodieColor) details.push(`Color Polerón: ${item.hoodieColor}`);
+            if (item.logoColor) details.push(`Color Logo: ${item.logoColor}`);
+            if (details.length > 0) msg += ` (${details.join(', ')})`;
             msg += ` a $${Number(item.product.price).toLocaleString('es-CL')} c/u\n`;
         });
         
@@ -368,6 +377,8 @@ const Cart = {
                         <div class="cart-item-title">${item.product.name}</div>
                         <div class="cart-item-meta">
                             ${item.size ? `Talla: ${item.size} <br>` : ''}
+                            ${item.hoodieColor ? `Color Polerón: ${item.hoodieColor} <br>` : ''}
+                            ${item.logoColor ? `Color Logo: ${item.logoColor} <br>` : ''}
                             $${Number(item.product.price).toLocaleString('es-CL')}
                         </div>
                         <div class="cart-item-controls">

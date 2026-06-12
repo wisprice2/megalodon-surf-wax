@@ -56,6 +56,8 @@ async function run() {
           stock INTEGER DEFAULT 0,
           brand TEXT DEFAULT 'MEGALODON',
           variants TEXT[] DEFAULT '{}'::TEXT[],
+          hoodie_colors TEXT[] DEFAULT '{}'::TEXT[],
+          logo_colors TEXT[] DEFAULT '{}'::TEXT[],
           created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
       );
     `);

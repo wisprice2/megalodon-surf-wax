@@ -75,7 +75,9 @@ export default async function handler(req, res) {
           tags: p.tags || [],
           stock: p.stock || 0,
           brand: p.brand || 'MEGALODON',
-          variants: p.variants || []
+          variants: p.variants || [],
+          hoodieColors: p.hoodie_colors || [],
+          logoColors: p.logo_colors || []
         }));
         return res.status(200).json(formatted);
       }
@@ -149,8 +151,8 @@ export default async function handler(req, res) {
 
         for (const p of products) {
           await sql(`
-            INSERT INTO products (id, name, category, price, compare_at_price, description, images, tags, stock, brand, variants)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            INSERT INTO products (id, name, category, price, compare_at_price, description, images, tags, stock, brand, variants, hoodie_colors, logo_colors)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
             ON CONFLICT (id) DO UPDATE SET
               name = EXCLUDED.name,
               category = EXCLUDED.category,
@@ -161,10 +163,12 @@ export default async function handler(req, res) {
               tags = EXCLUDED.tags,
               stock = EXCLUDED.stock,
               brand = EXCLUDED.brand,
-              variants = EXCLUDED.variants
+              variants = EXCLUDED.variants,
+              hoodie_colors = EXCLUDED.hoodie_colors,
+              logo_colors = EXCLUDED.logo_colors
           `, [
             p.id, p.name, p.category, Number(p.price), p.compareAtPrice ? Number(p.compareAtPrice) : null,
-            p.description, p.images || [], p.tags || [], p.stock || 0, p.brand || 'MEGALODON', p.variants || []
+            p.description, p.images || [], p.tags || [], p.stock || 0, p.brand || 'MEGALODON', p.variants || [], p.hoodieColors || [], p.logoColors || []
           ]);
         }
 
@@ -195,8 +199,8 @@ export default async function handler(req, res) {
         // 3. Upsert products
         for (const p of productsArray) {
           await sql(`
-            INSERT INTO products (id, name, category, price, compare_at_price, description, images, tags, stock, brand, variants)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            INSERT INTO products (id, name, category, price, compare_at_price, description, images, tags, stock, brand, variants, hoodie_colors, logo_colors)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
             ON CONFLICT (id) DO UPDATE SET
               name = EXCLUDED.name,
               category = EXCLUDED.category,
@@ -207,7 +211,9 @@ export default async function handler(req, res) {
               tags = EXCLUDED.tags,
               stock = EXCLUDED.stock,
               brand = EXCLUDED.brand,
-              variants = EXCLUDED.variants
+              variants = EXCLUDED.variants,
+              hoodie_colors = EXCLUDED.hoodie_colors,
+              logo_colors = EXCLUDED.logo_colors
           `, [
             p.id,
             p.name,
@@ -219,7 +225,9 @@ export default async function handler(req, res) {
             p.tags || [],
             p.stock || 0,
             p.brand || 'MEGALODON',
-            p.variants || []
+            p.variants || [],
+            p.hoodieColors || [],
+            p.logoColors || []
           ]);
         }
 
