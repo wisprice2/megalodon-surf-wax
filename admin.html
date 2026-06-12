@@ -1494,34 +1494,22 @@
             syncBtn.disabled = true;
 
             try {
-                // 1. Sync Categories
-                const resCats = await fetch('/api/products?action=save_categories', {
+                // Sincronizar categorías y productos juntos
+                const res = await fetch('/api/products?action=sync_all', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify(CATEGORIES)
+                    body: JSON.stringify({
+                        categories: CATEGORIES,
+                        products: PRODUCTS
+                    })
                 });
 
-                if (!resCats.ok) {
-                    const err = await resCats.json();
-                    throw new Error(`Sincronización de categorías falló: ${err.error}`);
-                }
-
-                // 2. Sync Products
-                const resProds = await fetch('/api/products', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(PRODUCTS)
-                });
-
-                if (!resProds.ok) {
-                    const err = await resProds.json();
-                    throw new Error(`Sincronización de productos falló: ${err.error}`);
+                if (!res.ok) {
+                    const err = await res.json();
+                    throw new Error(`Error de sincronización: ${err.error || 'Desconocido'}`);
                 }
 
                 alert('¡Datos guardados y sincronizados con Supabase de manera exitosa!');

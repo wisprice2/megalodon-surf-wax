@@ -117,19 +117,60 @@ export default async function handler(req, res) {
       }
 
       if (action === 'save_categories') {
-        const categoriesArray = req.body; // Expects array of strings e.g. ["Ceras", "Apparel", "Accesorios"]
-        if (!Array.isArray(categoriesArray)) {
-          return res.status(400).json({ error: 'Se esperaba un array de categorías' });
-        }
-
-        // 1. Delete categories not in the new payload
+        const categoriesArray = req.body;
+        if (!Array.isArray(categoriesArray)) return res.status(400).json({ error: 'Se esperaba un array de categorías' });
         if (categoriesArray.length > 0) {
           await sql('DELETE FROM categories WHERE NOT (name = ANY($1))', [categoriesArray]);
-          
-          // 2. Insert new categories
           for (const name of categoriesArray) {
             await sql('INSERT INTO categories (name) VALUES ($1) ON CONFLICT (name) DO NOTHING', [name]);
           }
+        } else {
+          await sql('DELETE FROM categories');
+        }
+        return res.status(200).json({ success: true });
+      } else if (action === 'sync_all') {
+        const { categories, products } = req.body;
+        if (!Array.isArray(categories) || !Array.isArray(products)) {
+          return res.status(400).json({ error: 'Payload inválido' });
+        }
+
+        // 1. Insert new categories first (to satisfy new product FKs)
+        for (const name of categories) {
+          await sql('INSERT INTO categories (name) VALUES ($1) ON CONFLICT (name) DO NOTHING', [name]);
+        }
+
+        // 2. Sync products
+        const activeIds = products.map(p => p.id).filter(id => id && typeof id === 'number');
+        if (activeIds.length > 0) {
+          await sql('DELETE FROM products WHERE NOT (id = ANY($1))', [activeIds]);
+        } else {
+          await sql('DELETE FROM products');
+        }
+
+        for (const p of products) {
+          await sql(`
+            INSERT INTO products (id, name, category, price, compare_at_price, description, images, tags, stock, brand, variants)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            ON CONFLICT (id) DO UPDATE SET
+              name = EXCLUDED.name,
+              category = EXCLUDED.category,
+              price = EXCLUDED.price,
+              compare_at_price = EXCLUDED.compare_at_price,
+              description = EXCLUDED.description,
+              images = EXCLUDED.images,
+              tags = EXCLUDED.tags,
+              stock = EXCLUDED.stock,
+              brand = EXCLUDED.brand,
+              variants = EXCLUDED.variants
+          `, [
+            p.id, p.name, p.category, Number(p.price), p.compareAtPrice ? Number(p.compareAtPrice) : null,
+            p.description, p.images || [], p.tags || [], p.stock || 0, p.brand || 'MEGALODON', p.variants || []
+          ]);
+        }
+
+        // 3. Delete old categories (now safe since old products are gone)
+        if (categories.length > 0) {
+          await sql('DELETE FROM categories WHERE NOT (name = ANY($1))', [categories]);
         } else {
           await sql('DELETE FROM categories');
         }
