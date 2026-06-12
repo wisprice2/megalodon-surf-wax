@@ -1028,41 +1028,8 @@
                 <h2 class="section-title">Nuestras <span class="text-gradient">Fórmulas</span></h2>
             </div>
 
-            <div class="carousel-container">
-                <!-- Product 1 -->
-                <div class="product-card carousel-card glass-panel" data-aos="fade-up" data-aos-delay="100">
-                    <div class="product-image-container" style="background: url('wax_1.png') center/cover; aspect-ratio: 4/5;">
-                        <div class="product-badge">Best Seller</div>
-                    </div>
-                    <div class="product-info" style="text-align: center;">
-                        <h3 class="product-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Cold Water</h3>
-                        <p class="product-desc" style="margin-bottom: 1.5rem;">Diseñada para el Pacífico. Extra adherencia en temperaturas bajo los 14°C.</p>
-                        <a href="producto.html?id=cold-wax" class="btn btn-outline" style="width: 100%;">Descubrir Producto</a>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="product-card carousel-card glass-panel" data-aos="fade-up" data-aos-delay="200" style="border-color: rgba(255,81,0,0.3);">
-                    <div class="product-image-container" style="background: url('wax_2.png') center/cover; aspect-ratio: 4/5;">
-                        <div class="product-badge">Eco Friendly</div>
-                    </div>
-                    <div class="product-info" style="text-align: center;">
-                        <h3 class="product-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Cool Water</h3>
-                        <p class="product-desc" style="margin-bottom: 1.5rem;">Ideal para verano. Mayor firmeza que soporta los rayos directos del sol.</p>
-                        <a href="producto.html?id=cool-wax" class="btn btn-primary" style="width: 100%;">Descubrir Producto</a>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="product-card carousel-card glass-panel" data-aos="fade-up" data-aos-delay="300">
-                    <div class="product-image-container" style="background: url('wax_3.png') center/cover; aspect-ratio: 4/5;">
-                    </div>
-                    <div class="product-info" style="text-align: center;">
-                        <h3 class="product-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Grip Extremo</h3>
-                        <p class="product-desc" style="margin-bottom: 1.5rem;">Textura desarrollada ola a ola para garantizar máxima fricción sin desgaste.</p>
-                        <a href="producto.html?id=pack-3" class="btn btn-outline" style="width: 100%;">Descubrir Producto</a>
-                    </div>
-                </div>
+            <div class="carousel-container" id="homeCarousel">
+                <div style="text-align: center; width: 100%; color: var(--text-muted); padding: 2rem;">Cargando fórmulas...</div>
             </div>
 
             <div style="text-align: center; margin-top: 3rem;" data-aos="fade-up">
@@ -1212,6 +1179,50 @@
                 navbar.querySelector('.navbar').style.background = 'rgba(10, 10, 15, 0.95)';
             } else {
                 navbar.querySelector('.navbar').style.background = 'rgba(255, 255, 255, 0.03)';
+            }
+        });
+
+        // Load Products for Carousel dynamically
+        document.addEventListener('DOMContentLoaded', async () => {
+            const carousel = document.getElementById('homeCarousel');
+            if (!carousel) return;
+            try {
+                const res = await fetch('/api/products?t=' + Date.now());
+                if (res.ok) {
+                    const products = await res.json();
+                    if (products.length > 0) {
+                        carousel.innerHTML = products.slice(0, 4).map((p, idx) => {
+                            const imgUrl = (p.images && p.images.length > 0) ? p.images[0] : 'logo.png';
+                            let badgeHtml = '';
+                            if (p.tags && p.tags.length > 0) {
+                                badgeHtml = `<div class="product-badge">${p.tags[0].toUpperCase()}</div>`;
+                            } else if (idx === 0) {
+                                badgeHtml = `<div class="product-badge">Destacado</div>`;
+                            }
+
+                            const btnClass = (idx % 2 !== 0) ? 'btn-primary' : 'btn-outline';
+                            const borderColorStyle = (idx % 2 !== 0) ? 'style="border-color: rgba(255,81,0,0.3);"' : '';
+
+                            return `
+                            <div class="product-card carousel-card glass-panel" data-aos="fade-up" data-aos-delay="${(idx % 3 + 1) * 100}" ${borderColorStyle}>
+                                <div class="product-image-container" style="background: url('${imgUrl}') center/cover; aspect-ratio: 4/5;">
+                                    ${badgeHtml}
+                                </div>
+                                <div class="product-info" style="text-align: center;">
+                                    <h3 class="product-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">${p.name}</h3>
+                                    <p class="product-desc" style="margin-bottom: 1.5rem;">${p.description ? (p.description.substring(0, 80) + (p.description.length > 80 ? '...' : '')) : ''}</p>
+                                    <a href="producto.html?id=${p.id}" class="btn ${btnClass}" style="width: 100%;">Descubrir Producto</a>
+                                </div>
+                            </div>
+                            `;
+                        }).join('');
+                    } else {
+                        carousel.innerHTML = '<div style="text-align: center; width: 100%; color: var(--text-muted); padding: 2rem;">Próximamente nuevas fórmulas...</div>';
+                    }
+                }
+            } catch (e) {
+                console.error("Error loading products for carousel:", e);
+                carousel.innerHTML = '<div style="text-align: center; width: 100%; color: var(--text-muted); padding: 2rem;">Error al cargar las fórmulas. Intenta recargar la página.</div>';
             }
         });
     </script>
