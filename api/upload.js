@@ -25,10 +25,27 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Método no permitido' });
   }
 
+  // Helper to get admin hash from DB
+  const { neon } = await import('@neondatabase/serverless');
+  const databaseUrl = process.env.DATABASE_URL;
+  const sql = databaseUrl ? neon(databaseUrl) : null;
+  
+  let dbHash = crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'Surfwax').digest('hex');
+  if (sql) {
+    try {
+      const rows = await sql('SELECT password_hash FROM admin_settings WHERE id = 1');
+      if (rows && rows.length > 0) {
+        dbHash = rows[0].password_hash;
+      }
+    } catch (e) {
+      console.error("Could not fetch admin settings", e);
+    }
+  }
+
   // Validate Token
   const authHeader = req.headers.authorization || '';
   const token = authHeader.replace('Bearer ', '');
-  const expectedToken = crypto.createHmac('sha256', adminPassword).update('Admin').digest('hex');
+  const expectedToken = crypto.createHmac('sha256', dbHash).update('Admin').digest('hex');
 
   if (!token || token !== expectedToken) {
     return res.status(401).json({ error: 'No autorizado' });

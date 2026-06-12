@@ -112,7 +112,8 @@ export default async function handler(req, res) {
         
         const newHash = crypto.createHash('sha256').update(newPassword).digest('hex');
         await sql('UPDATE admin_settings SET password_hash = $1, updated_at = NOW() WHERE id = 1', [newHash]);
-        return res.status(200).json({ success: true });
+        const newToken = crypto.createHmac('sha256', newHash).update('Admin').digest('hex');
+        return res.status(200).json({ success: true, token: newToken });
       }
 
       if (action === 'save_categories') {
