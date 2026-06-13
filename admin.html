@@ -1026,6 +1026,9 @@
                         <span class="preset-badge" onclick="addPresetHoodieColor('Azul Marino')">Azul Marino</span>
                         <span class="preset-badge" onclick="addPresetHoodieColor('Rojo')">Rojo</span>
                         <span class="preset-badge" onclick="addPresetHoodieColor('Verde Musgo')">Verde Musgo</span>
+                        <span class="preset-badge" onclick="addPresetHoodieColor('Beige')">Beige</span>
+                        <span class="preset-badge" onclick="addPresetHoodieColor('Lila')">Lila</span>
+                        <span class="preset-badge" onclick="addPresetHoodieColor('Multicolor')">Multicolor</span>
                     </div>
                 </div>
 
@@ -1049,6 +1052,7 @@
                         <span class="preset-badge" onclick="addPresetLogoColor('Azul')">Azul</span>
                         <span class="preset-badge" onclick="addPresetLogoColor('Dorado')">Dorado</span>
                         <span class="preset-badge" onclick="addPresetLogoColor('Plateado')">Plateado</span>
+                        <span class="preset-badge" onclick="addPresetLogoColor('Multicolor')">Multicolor</span>
                     </div>
                 </div>
 
@@ -1089,6 +1093,95 @@
         let currentLogoColors = [];
         let currentImages = [];
         let hasChanges = false;
+
+        const ADMIN_COLOR_MAP = {
+            "crema": "#f5e6d3",
+            "mostaza": "#e1ad01",
+            "burdeo": "#6b0029",
+            "celeste": "#80d4f2",
+            "salmón": "#e78060",
+            "salmon": "#e78060",
+            "morado": "#8a2be2",
+            "rosa viejo": "#cfa0b5",
+            "rosado": "#ec79c4",
+            "verde": "#00a854",
+            "verde musgo": "#8da87e",
+            "vino": "#5c061e",
+            "amarillo": "#fcd116",
+            "azul marino": "#002f6c",
+            "blanco": "#ffffff",
+            "turquesa": "#25a4c4",
+            "gris claro": "#d3d3d3",
+            "gris oscuro": "#4c4c4c",
+            "naranja": "#ff7900",
+            "naranjo": "#ff7900",
+            "negro": "#111111",
+            "rojo": "#ff0000",
+            "menta": "#61c4b3",
+            "azul": "#103eb3",
+            "fucsia": "#db2d71",
+            "dorado": "#ffd700",
+            "plateado": "#c0c0c0",
+            "beige": "#f5f5dc",
+            "lila": "#c8a2c8",
+            "multicolor": "conic-gradient(red, orange, yellow, green, blue, purple, red)",
+            "calipso": "#3ea3b5",
+            "palo rosa": "#e5b1b8",
+            "guinda": "#7a0016",
+            "concho de vino": "#4a0410",
+            "café": "#4b3621",
+            "cafe": "#4b3621",
+            "marrón": "#5c4033",
+            "marron": "#5c4033",
+            "caqui": "#c3b091",
+            "kaki": "#c3b091",
+            "verde oliva": "#556b2f",
+            "verde botella": "#006a4e",
+            "verde manzana": "#8db600",
+            "verde agua": "#98ff98",
+            "verde esmeralda": "#50c878",
+            "coral": "#ff7f50",
+            "ladrillo": "#b22222",
+            "terracota": "#e2725b",
+            "magenta": "#ff00ff",
+            "índigo": "#4b0082",
+            "indigo": "#4b0082",
+            "cian": "#00ffff",
+            "azul acero": "#4682b4",
+            "azul rey": "#4169e1",
+            "azul cielo": "#87ceeb",
+            "plomo": "#708090",
+            "marengo": "#4c4f56",
+            "gris melange": "#a9a9a9",
+            "amarillo pato": "#ffcc00",
+            "amarillo ocre": "#cc7722",
+            "granate": "#800000",
+            "esmeralda": "#50c878",
+            "jade": "#00a86b",
+            "arena": "#c2b280",
+            "crudo": "#f5f5dc",
+            "perla": "#eae0c8",
+            "frambuesa": "#e30b5d",
+            "cereza": "#de3163",
+            "durazno": "#ffcba4",
+            "lavanda": "#e6e6fa",
+            "púrpura": "#800080",
+            "purpura": "#800080",
+            "violeta": "#ee82ee",
+            "ciruela": "#dda0dd"
+        };
+
+        function getAdminColorStyle(colorName) {
+            const clean = colorName.toLowerCase().trim();
+            if (ADMIN_COLOR_MAP[clean]) {
+                const bgProp = ADMIN_COLOR_MAP[clean].includes('gradient') ? 'background' : 'background-color';
+                return `${bgProp}: ${ADMIN_COLOR_MAP[clean]};`;
+            }
+            if (clean.startsWith('#')) {
+                return `background-color: ${colorName};`;
+            }
+            return `background: conic-gradient(red, orange, yellow, green, blue, purple, red);`;
+        }
 
         // Check active session on load
         document.addEventListener('DOMContentLoaded', async () => {
@@ -1476,7 +1569,8 @@
         function renderHoodieColors() {
             const container = document.getElementById('hoodieColorsContainer');
             container.innerHTML = currentHoodieColors.map(c => `
-                <span class="variant-tag">
+                <span class="variant-tag" style="display: flex; align-items: center; gap: 4px;">
+                    <div style="width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); ${getAdminColorStyle(c)}"></div>
                     ${c}
                     <button type="button" onclick="removeHoodieColor('${c}')">×</button>
                 </span>
@@ -1511,7 +1605,8 @@
         function renderLogoColors() {
             const container = document.getElementById('logoColorsContainer');
             container.innerHTML = currentLogoColors.map(c => `
-                <span class="variant-tag">
+                <span class="variant-tag" style="display: flex; align-items: center; gap: 4px;">
+                    <div style="width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); ${getAdminColorStyle(c)}"></div>
                     ${c}
                     <button type="button" onclick="removeLogoColor('${c}')">×</button>
                 </span>

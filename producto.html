@@ -1242,25 +1242,75 @@
             "gris claro": "#d3d3d3",
             "gris oscuro": "#4c4c4c",
             "naranja": "#ff7900",
+            "naranjo": "#ff7900",
             "negro": "#111111",
             "rojo": "#ff0000",
             "menta": "#61c4b3",
             "azul": "#103eb3",
             "fucsia": "#db2d71",
             "dorado": "#ffd700",
-            "plateado": "#c0c0c0"
+            "plateado": "#c0c0c0",
+            "beige": "#f5f5dc",
+            "lila": "#c8a2c8",
+            "multicolor": "conic-gradient(red, orange, yellow, green, blue, purple, red)",
+            "calipso": "#3ea3b5",
+            "palo rosa": "#e5b1b8",
+            "guinda": "#7a0016",
+            "concho de vino": "#4a0410",
+            "café": "#4b3621",
+            "cafe": "#4b3621",
+            "marrón": "#5c4033",
+            "marron": "#5c4033",
+            "caqui": "#c3b091",
+            "kaki": "#c3b091",
+            "verde oliva": "#556b2f",
+            "verde botella": "#006a4e",
+            "verde manzana": "#8db600",
+            "verde agua": "#98ff98",
+            "verde esmeralda": "#50c878",
+            "coral": "#ff7f50",
+            "ladrillo": "#b22222",
+            "terracota": "#e2725b",
+            "magenta": "#ff00ff",
+            "índigo": "#4b0082",
+            "indigo": "#4b0082",
+            "cian": "#00ffff",
+            "azul acero": "#4682b4",
+            "azul rey": "#4169e1",
+            "azul cielo": "#87ceeb",
+            "plomo": "#708090",
+            "marengo": "#4c4f56",
+            "gris melange": "#a9a9a9",
+            "amarillo pato": "#ffcc00",
+            "amarillo ocre": "#cc7722",
+            "granate": "#800000",
+            "esmeralda": "#50c878",
+            "jade": "#00a86b",
+            "arena": "#c2b280",
+            "crudo": "#f5f5dc",
+            "perla": "#eae0c8",
+            "frambuesa": "#e30b5d",
+            "cereza": "#de3163",
+            "durazno": "#ffcba4",
+            "lavanda": "#e6e6fa",
+            "púrpura": "#800080",
+            "purpura": "#800080",
+            "violeta": "#ee82ee",
+            "ciruela": "#dda0dd"
         };
 
         function getSwatchStyle(colorName) {
             const clean = colorName.toLowerCase().trim();
             if (COLOR_MAP[clean]) {
                 const borderVal = clean === 'blanco' ? 'border: 2px solid rgba(255,255,255,0.4);' : '';
-                return `background-color: ${COLOR_MAP[clean]}; ${borderVal}`;
+                const bgProp = COLOR_MAP[clean].includes('gradient') ? 'background' : 'background-color';
+                return `${bgProp}: ${COLOR_MAP[clean]}; ${borderVal}`;
             }
             if (clean.startsWith('#')) {
                 return `background-color: ${colorName};`;
             }
-            return `background: linear-gradient(135deg, #444, #222);`;
+            // Fallback a paleta multicolor
+            return `background: conic-gradient(red, orange, yellow, green, blue, purple, red);`;
         }
 
         async function initProduct() {
@@ -1347,9 +1397,7 @@
                 hoodieColorWrap.style.display = 'block';
                 hoodieColorContainer.innerHTML = currentProduct.hoodieColors.map(c => {
                     const style = getSwatchStyle(c);
-                    const clean = c.toLowerCase().trim();
-                    const showText = !COLOR_MAP[clean] && !clean.startsWith('#') ? c.charAt(0) : '';
-                    return `<div class="color-swatch" style="${style}" title="${c}" onclick="selectHoodieColor('${c}', this)">${showText}</div>`;
+                    return `<div class="color-swatch" style="${style}" title="${c}" onclick="selectHoodieColor('${c}', this)"></div>`;
                 }).join('');
             } else {
                 hoodieColorWrap.style.display = 'none';
@@ -1362,9 +1410,7 @@
                 logoColorWrap.style.display = 'block';
                 logoColorContainer.innerHTML = currentProduct.logoColors.map(c => {
                     const style = getSwatchStyle(c);
-                    const clean = c.toLowerCase().trim();
-                    const showText = !COLOR_MAP[clean] && !clean.startsWith('#') ? c.charAt(0) : '';
-                    return `<div class="color-swatch" style="${style}" title="${c}" onclick="selectLogoColor('${c}', this)">${showText}</div>`;
+                    return `<div class="color-swatch" style="${style}" title="${c}" onclick="selectLogoColor('${c}', this)"></div>`;
                 }).join('');
             } else {
                 logoColorWrap.style.display = 'none';
