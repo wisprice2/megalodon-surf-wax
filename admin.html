@@ -958,6 +958,11 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="pSubtitle">Subtítulo / Modelo <span style="color: var(--text-muted); font-weight: 300;">(Opcional — ej: "Shark Attack", "Wave Rider", "Classic Logo")</span></label>
+                    <input type="text" id="pSubtitle" class="form-control" placeholder="Nombre del modelo o diseño para identificar el producto">
+                </div>
+
                 <div class="grid-2">
                     <div class="form-group">
                         <label for="pPrice">Precio ($)</label>
@@ -1294,11 +1299,11 @@
 
         function getDefaultProducts() {
             return [
-                { id: 1, name: 'Cold Water Wax', category: 'Ceras', price: 4990, compareAtPrice: null, description: 'Fórmula artesanal 100% natural. Grip brutal para el Pacífico chileno.', images: ['wax_1.png'], tags: ['best seller'], stock: 50, brand: 'MEGALODON', variants: [] },
-                { id: 2, name: 'Cool Water Wax', category: 'Ceras', price: 4990, compareAtPrice: null, description: 'Para los días de verano. Más firme, ideal para agua fresca y viajes al norte.', images: ['wax_2.png'], tags: ['nuevo'], stock: 40, brand: 'MEGALODON', variants: [] },
-                { id: 3, name: 'Surf Pack: 3 Barras', category: 'Ceras', price: 12900, compareAtPrice: 14970, description: 'Lleva 3 barras y ahorra. El pack perfecto para el surfer que siempre quiere tener el mejor grip asegurado.', images: ['wax_3.png'], tags: ['ahorro', 'oferta'], stock: 30, brand: 'MEGALODON', variants: [] },
-                { id: 4, name: 'Polera Megalodon', category: 'Apparel', price: 18990, compareAtPrice: 24990, description: 'Camiseta premium de corte oversize en algodón pesado. Hecha para el post-surf. Diseño exclusivo Megalodon.', images: ['bf88c491-03e3-42bd-8b4b-edc8245bcec8.png'], tags: ['apparel'], stock: 20, brand: 'MEGALODON', variants: ['S', 'M', 'L', 'XL'] },
-                { id: 5, name: "Leash 9' Megalodon", category: 'Accesorios', price: 14990, compareAtPrice: 19990, description: "Leash ultra resistente de 7mm de uretano premium para olas de hasta 2 metros.", images: ['leash_9.png'], tags: ['accesorios'], stock: 15, brand: 'MEGALODON', variants: [] }
+                { id: 1, name: 'Cold Water Wax', category: 'Ceras', price: 4990, compareAtPrice: null, description: 'Fórmula artesanal 100% natural. Grip brutal para el Pacífico chileno.', images: ['wax_1.png'], tags: ['best seller'], stock: 50, brand: 'MEGALODON', subtitle: '', variants: [] },
+                { id: 2, name: 'Cool Water Wax', category: 'Ceras', price: 4990, compareAtPrice: null, description: 'Para los días de verano. Más firme, ideal para agua fresca y viajes al norte.', images: ['wax_2.png'], tags: ['nuevo'], stock: 40, brand: 'MEGALODON', subtitle: '', variants: [] },
+                { id: 3, name: 'Surf Pack: 3 Barras', category: 'Ceras', price: 12900, compareAtPrice: 14970, description: 'Lleva 3 barras y ahorra. El pack perfecto para el surfer que siempre quiere tener el mejor grip asegurado.', images: ['wax_3.png'], tags: ['ahorro', 'oferta'], stock: 30, brand: 'MEGALODON', subtitle: '', variants: [] },
+                { id: 4, name: 'Polera Megalodon', category: 'Apparel', price: 18990, compareAtPrice: 24990, description: 'Camiseta premium de corte oversize en algodón pesado. Hecha para el post-surf. Diseño exclusivo Megalodon.', images: ['bf88c491-03e3-42bd-8b4b-edc8245bcec8.png'], tags: ['apparel'], stock: 20, brand: 'MEGALODON', subtitle: '', variants: ['S', 'M', 'L', 'XL'] },
+                { id: 5, name: "Leash 9' Megalodon", category: 'Accesorios', price: 14990, compareAtPrice: 19990, description: "Leash ultra resistente de 7mm de uretano premium para olas de hasta 2 metros.", images: ['leash_9.png'], tags: ['accesorios'], stock: 15, brand: 'MEGALODON', subtitle: '', variants: [] }
             ];
         }
 
@@ -1391,6 +1396,7 @@
             const filtered = PRODUCTS.filter(p => 
                 p.name.toLowerCase().includes(query) || 
                 p.category.toLowerCase().includes(query) ||
+                (p.subtitle && p.subtitle.toLowerCase().includes(query)) ||
                 (p.tags && p.tags.some(t => t.toLowerCase().includes(query)))
             );
 
@@ -1408,7 +1414,7 @@
                 return `
                     <tr>
                         <td><img src="${imgUrl}" class="product-thumb" alt="${p.name}" onerror="this.src='logo.png'"></td>
-                        <td style="font-weight: 600;">${p.name}</td>
+                        <td style="font-weight: 600;">${p.name}${p.subtitle ? `<div style="font-weight: 400; font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">Modelo: ${p.subtitle}</div>` : ''}</td>
                         <td><span class="badge" style="background: rgba(255,255,255,0.05); color: #fff; border-color: var(--border);">${p.category}</span></td>
                         <td style="font-weight: 500; color: var(--accent-secondary);">$${Number(p.price).toLocaleString('es-CL')}</td>
                         <td>${p.stock} uds</td>
@@ -1438,6 +1444,7 @@
                 document.getElementById('editProductId').value = prod.id;
                 document.getElementById('pName').value = prod.name;
                 document.getElementById('pCategory').value = prod.category;
+                document.getElementById('pSubtitle').value = prod.subtitle || '';
                 document.getElementById('pPrice').value = prod.price;
                 document.getElementById('pComparePrice').value = prod.compareAtPrice || '';
                 document.getElementById('pStock').value = prod.stock;
@@ -1452,6 +1459,7 @@
             } else {
                 document.getElementById('modalTitle').textContent = 'Nuevo Producto';
                 document.getElementById('editProductId').value = '';
+                document.getElementById('pSubtitle').value = '';
                 document.getElementById('pBrand').value = 'MEGALODON';
                 document.getElementById('pStock').value = 10;
                 currentHoodieColors = [];
@@ -1495,6 +1503,7 @@
             const compareAtPrice = compPriceVal ? parseFloat(compPriceVal) : null;
             const stock = parseInt(document.getElementById('pStock').value);
             const brand = document.getElementById('pBrand').value.trim();
+            const subtitle = document.getElementById('pSubtitle').value.trim();
             const description = document.getElementById('pDesc').value.trim();
             const tagsInput = document.getElementById('pTags').value;
             const tags = tagsInput ? tagsInput.split(',').map(t => t.trim()).filter(t => t) : [];
@@ -1505,7 +1514,7 @@
                 if (idx !== -1) {
                     PRODUCTS[idx] = {
                         ...PRODUCTS[idx],
-                        name, category, price, compareAtPrice, stock, brand, description, tags,
+                        name, category, price, compareAtPrice, stock, brand, subtitle, description, tags,
                         variants: currentVariants,
                         hoodieColors: currentHoodieColors,
                         logoColors: currentLogoColors,
@@ -1517,7 +1526,7 @@
                 const newId = Math.floor(Date.now() / 1000) + Math.floor(Math.random() * 10000);
                 PRODUCTS.push({
                     id: newId,
-                    name, category, price, compareAtPrice, stock, brand, description, tags,
+                    name, category, price, compareAtPrice, stock, brand, subtitle, description, tags,
                     variants: currentVariants,
                     hoodieColors: currentHoodieColors,
                     logoColors: currentLogoColors,

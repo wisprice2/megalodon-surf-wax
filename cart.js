@@ -37,6 +37,7 @@ const Cart = {
                 product: {
                     id: product.id,
                     name: product.name,
+                    subtitle: product.subtitle || '',
                     price: product.price,
                     image: (product.images && product.images.length > 0) ? product.images[0] : 'logo.png'
                 },
@@ -78,7 +79,10 @@ const Cart = {
         let msg = "Hola! Quiero realizar un pedido desde la web:\n\n";
         
         this.items.forEach(item => {
-            msg += `- ${item.qty}x ${item.product.name}`;
+            const displayName = item.product.subtitle 
+                ? `${item.product.name} (Modelo: ${item.product.subtitle})` 
+                : item.product.name;
+            msg += `- ${item.qty}x ${displayName}`;
             let details = [];
             if (item.size) details.push(`Talla: ${item.size}`);
             if (item.hoodieColor) details.push(`Color Polerón: ${item.hoodieColor}`);
@@ -375,6 +379,7 @@ const Cart = {
                     <img src="${item.product.image}" class="cart-item-img" alt="${item.product.name}">
                     <div class="cart-item-info">
                         <div class="cart-item-title">${item.product.name}</div>
+                        ${item.product.subtitle ? `<div style="font-size: 0.75rem; color: #ff8a00; margin-bottom: 0.2rem;">Modelo: ${item.product.subtitle}</div>` : ''}
                         <div class="cart-item-meta">
                             ${item.size ? `Talla: ${item.size} <br>` : ''}
                             ${item.hoodieColor ? `Color Polerón: ${item.hoodieColor} <br>` : ''}

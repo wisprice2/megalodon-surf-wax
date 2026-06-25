@@ -1051,7 +1051,9 @@
                 
                 // Construct subtitle (variants size list, or category, or brand)
                 let subtitle = p.brand || 'MEGALODON';
-                if (p.variants && p.variants.length > 0) {
+                if (p.subtitle) {
+                    subtitle = p.subtitle;
+                } else if (p.variants && p.variants.length > 0) {
                     subtitle = p.variants.join(' / ');
                 } else if (p.category === 'Ceras') {
                     if (p.name.toLowerCase().includes('cold')) {

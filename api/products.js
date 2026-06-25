@@ -67,6 +67,7 @@ export default async function handler(req, res) {
         const formatted = rows.map(p => ({
           id: Number(p.id),
           name: p.name,
+          subtitle: p.subtitle || '',
           category: p.category,
           price: Number(p.price),
           compareAtPrice: p.compare_at_price ? Number(p.compare_at_price) : null,
@@ -151,10 +152,11 @@ export default async function handler(req, res) {
 
         for (const p of products) {
           await sql(`
-            INSERT INTO products (id, name, category, price, compare_at_price, description, images, tags, stock, brand, variants, hoodie_colors, logo_colors)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+            INSERT INTO products (id, name, subtitle, category, price, compare_at_price, description, images, tags, stock, brand, variants, hoodie_colors, logo_colors)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
             ON CONFLICT (id) DO UPDATE SET
               name = EXCLUDED.name,
+              subtitle = EXCLUDED.subtitle,
               category = EXCLUDED.category,
               price = EXCLUDED.price,
               compare_at_price = EXCLUDED.compare_at_price,
@@ -167,7 +169,7 @@ export default async function handler(req, res) {
               hoodie_colors = EXCLUDED.hoodie_colors,
               logo_colors = EXCLUDED.logo_colors
           `, [
-            p.id, p.name, p.category, Number(p.price), p.compareAtPrice ? Number(p.compareAtPrice) : null,
+            p.id, p.name, p.subtitle || '', p.category, Number(p.price), p.compareAtPrice ? Number(p.compareAtPrice) : null,
             p.description, p.images || [], p.tags || [], p.stock || 0, p.brand || 'MEGALODON', p.variants || [], p.hoodieColors || [], p.logoColors || []
           ]);
         }
@@ -199,10 +201,11 @@ export default async function handler(req, res) {
         // 3. Upsert products
         for (const p of productsArray) {
           await sql(`
-            INSERT INTO products (id, name, category, price, compare_at_price, description, images, tags, stock, brand, variants, hoodie_colors, logo_colors)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+            INSERT INTO products (id, name, subtitle, category, price, compare_at_price, description, images, tags, stock, brand, variants, hoodie_colors, logo_colors)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
             ON CONFLICT (id) DO UPDATE SET
               name = EXCLUDED.name,
+              subtitle = EXCLUDED.subtitle,
               category = EXCLUDED.category,
               price = EXCLUDED.price,
               compare_at_price = EXCLUDED.compare_at_price,
@@ -217,6 +220,7 @@ export default async function handler(req, res) {
           `, [
             p.id,
             p.name,
+            p.subtitle || '',
             p.category,
             Number(p.price),
             p.compareAtPrice ? Number(p.compareAtPrice) : null,

@@ -997,7 +997,16 @@
             font-size: clamp(3rem, 5vw, 4.5rem);
             color: var(--white);
             line-height: 1;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+        .pdp-subtitle {
+            font-size: 1rem;
+            color: var(--orange, #ff8a00);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            opacity: 0.9;
         }
         .pdp-price-wrap {
             display: flex;
@@ -1161,6 +1170,7 @@
                 <!-- Detalles -->
                 <div class="pdp-info-col" data-aos="fade-left">
                     <h1 class="pdp-title" id="pdpTitle">Cargando...</h1>
+                    <div class="pdp-subtitle" id="pdpSubtitle" style="display: none;"></div>
                     
                     <div class="pdp-price-wrap">
                         <span class="pdp-price" id="pdpPrice">$0</span>
@@ -1365,6 +1375,15 @@
                 thumbsContainer.innerHTML = '';
             }
             document.getElementById('pdpTitle').textContent = currentProduct.name;
+
+            // Subtitle / Model
+            const subtitleEl = document.getElementById('pdpSubtitle');
+            if (currentProduct.subtitle) {
+                subtitleEl.textContent = 'Modelo: ' + currentProduct.subtitle;
+                subtitleEl.style.display = 'block';
+            } else {
+                subtitleEl.style.display = 'none';
+            }
             
             document.getElementById('pdpPrice').textContent = '$' + Number(currentProduct.price).toLocaleString('es-CL');
             

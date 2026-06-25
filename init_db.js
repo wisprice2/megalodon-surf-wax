@@ -47,6 +47,7 @@ async function run() {
       CREATE TABLE IF NOT EXISTS products (
           id BIGINT PRIMARY KEY,
           name TEXT NOT NULL,
+          subtitle TEXT DEFAULT '',
           category TEXT NOT NULL REFERENCES categories(name) ON UPDATE CASCADE,
           price NUMERIC NOT NULL,
           compare_at_price NUMERIC NULL,
