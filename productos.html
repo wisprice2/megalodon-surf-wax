@@ -1049,21 +1049,8 @@
                 const badge = (p.tags && p.tags.length > 0) ? p.tags[0] : '';
                 const badgeHtml = badge ? `<div class="product-badge">${badge}</div>` : '';
                 
-                // Construct subtitle (variants size list, or category, or brand)
-                let subtitle = p.brand || 'MEGALODON';
-                if (p.subtitle) {
-                    subtitle = p.subtitle;
-                } else if (p.variants && p.variants.length > 0) {
-                    subtitle = p.variants.join(' / ');
-                } else if (p.category === 'Ceras') {
-                    if (p.name.toLowerCase().includes('cold')) {
-                        subtitle = 'Agua Fría (9° - 14°C)';
-                    } else if (p.name.toLowerCase().includes('cool')) {
-                        subtitle = 'Agua Fresca (13° - 20°C)';
-                    } else {
-                        subtitle = 'Combina a tu gusto';
-                    }
-                }
+                // Render subtitle only if it exists, without fallbacks
+                const subtitleHtml = p.subtitle ? `<div class="product-temp">${p.subtitle}</div>` : '';
                 
                 const formattedPrice = '$' + Number(p.price).toLocaleString('es-CL');
                 
@@ -1073,7 +1060,7 @@
                             ${badgeHtml}
                         </div>
                         <div class="product-info">
-                            <div class="product-temp">${subtitle}</div>
+                            ${subtitleHtml}
                             <h3 class="product-title">${p.name}</h3>
                             <p class="product-desc">${p.description}</p>
                             <div class="product-footer">
