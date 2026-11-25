@@ -920,6 +920,7 @@
         }
     </style>
     <link rel="stylesheet" href="mobile.css">
+    <script src="/product-images.js?v=1" defer></script>
 </head>
 <body>
 
@@ -1363,6 +1364,7 @@
             
             const imgUrl = (currentProduct.images && currentProduct.images.length > 0) ? currentProduct.images[0] : 'logo.png';
             const imgEl = document.getElementById('pdpImage');
+            imgEl.alt = currentProduct.name;
             imgEl.onload = function() { imgEl.style.opacity = '1'; };
             imgEl.src = imgUrl;
 

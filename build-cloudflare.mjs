@@ -3,7 +3,7 @@ import path from 'node:path';
 
 fs.mkdirSync('dist', { recursive: true });
 for (const entry of fs.readdirSync('.')) {
-  if (/\.(html|css|png|jpe?g|webp|svg|mp4|ico|txt|xml)$/.test(entry) || entry === 'cart.js') {
+  if (/\.(html|css|png|jpe?g|webp|svg|mp4|ico|txt|xml)$/.test(entry) || ['cart.js', 'product-images.js'].includes(entry)) {
     fs.copyFileSync(entry, path.join('dist', entry));
   }
 }
