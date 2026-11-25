@@ -1193,9 +1193,9 @@
                         </div>
                     </div>
 
-                    <!-- Colores del Polerón (Circular Swatches) -->
+                    <!-- Colores del producto (Circular Swatches) -->
                     <div id="pdpHoodieColorsWrapper" style="display: none; margin-bottom: 1.5rem;">
-                        <span class="pdp-meta-label">Color del Polerón: <span id="selectedHoodieColorText" style="color: var(--orange); font-weight: 600; text-transform: none; letter-spacing: 0;">Selecciona un color</span></span>
+                        <span class="pdp-meta-label">Color: <span id="selectedHoodieColorText" style="color: var(--orange); font-weight: 600; text-transform: none; letter-spacing: 0;">Selecciona un color</span></span>
                         <div class="color-selector" id="pdpHoodieColors" style="display: flex; gap: 0.8rem; margin-top: 0.5rem; flex-wrap: wrap;">
                             <!-- Generado dinámicamente -->
                         </div>
@@ -1471,7 +1471,7 @@
                 return;
             }
             if (currentProduct.hoodieColors && currentProduct.hoodieColors.length > 0 && !selectedHoodieColor) {
-                alert('Por favor selecciona un color de polerón primero.');
+                alert('Por favor selecciona un color del producto primero.');
                 return;
             }
             if (currentProduct.logoColors && currentProduct.logoColors.length > 0 && !selectedLogoColor) {

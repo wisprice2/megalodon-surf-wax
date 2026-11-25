@@ -85,7 +85,7 @@ const Cart = {
             msg += `- ${item.qty}x ${displayName}`;
             let details = [];
             if (item.size) details.push(`Talla: ${item.size}`);
-            if (item.hoodieColor) details.push(`Color Polerón: ${item.hoodieColor}`);
+            if (item.hoodieColor) details.push(`Color: ${item.hoodieColor}`);
             if (item.logoColor) details.push(`Color Logo: ${item.logoColor}`);
             if (details.length > 0) msg += ` (${details.join(', ')})`;
             msg += ` a $${Number(item.product.price).toLocaleString('es-CL')} c/u\n`;
@@ -382,7 +382,7 @@ const Cart = {
                         ${item.product.subtitle ? `<div style="font-size: 0.75rem; color: #ff8a00; margin-bottom: 0.2rem;">Modelo: ${item.product.subtitle}</div>` : ''}
                         <div class="cart-item-meta">
                             ${item.size ? `Talla: ${item.size} <br>` : ''}
-                            ${item.hoodieColor ? `Color Polerón: ${item.hoodieColor} <br>` : ''}
+                            ${item.hoodieColor ? `Color: ${item.hoodieColor} <br>` : ''}
                             ${item.logoColor ? `Color Logo: ${item.logoColor} <br>` : ''}
                             $${Number(item.product.price).toLocaleString('es-CL')}
                         </div>
