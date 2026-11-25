@@ -7,3 +7,6 @@ __pycache__/
 node_modules/
 .env*
 init-db.js
+dist/
+.wrangler/
+audit-migration.mjs

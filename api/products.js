@@ -1,10 +1,7 @@
 import { neon } from '@neondatabase/serverless';
 
-const databaseUrl = process.env.DATABASE_URL;
-
-const sql = databaseUrl ? neon(databaseUrl) : null;
-
-export default async function handler(req, res) {
+export default async function handler(req, res, env = process.env) {
+  const sql = env.DATABASE_URL ? neon(env.DATABASE_URL) : null;
   // CORS Headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -19,7 +16,7 @@ export default async function handler(req, res) {
   // Helper to get admin hash
   const getAdminHash = async () => {
     const crypto = await import('crypto');
-    let hash = crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'Surfwax').digest('hex');
+    let hash = crypto.createHash('sha256').update(env.ADMIN_PASSWORD || 'Surfwax').digest('hex');
     if (sql) {
       try {
         const rows = await sql('SELECT password_hash FROM admin_settings WHERE id = 1');
@@ -36,6 +33,9 @@ export default async function handler(req, res) {
   // --- LOGIN ROUTE ---
   if (action === 'login' && req.method === 'POST') {
     const { username, password } = req.body;
+    if (typeof username !== 'string' || typeof password !== 'string') {
+      return res.status(400).json({ error: 'Credenciales inválidas' });
+    }
     const crypto = await import('crypto');
     const inputHash = crypto.createHash('sha256').update(password).digest('hex');
     const dbHash = await getAdminHash();
