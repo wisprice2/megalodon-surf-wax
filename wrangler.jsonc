@@ -2,5 +2,8 @@
   "name": "megalodon-surf-wax",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-11-25",
-  "compatibility_flags": ["nodejs_compat"]
+  "compatibility_flags": ["nodejs_compat"],
+  "kv_namespaces": [
+    { "binding": "IMAGES", "id": "c768cb4881404db4a81bbdd90543ccb1" }
+  ]
 }
