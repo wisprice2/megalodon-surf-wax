@@ -1,5 +1,5 @@
 import handler from '../../api/products.js';
-import imageMap from '../../migration-image-map.json' with { type: 'json' };
+import imageMap from '../../migration-image-map.js';
 import { createHash } from 'node:crypto';
 
 export async function onRequest({ request, env }) {
